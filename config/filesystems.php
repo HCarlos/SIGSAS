@@ -53,6 +53,28 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'profile' => [
+            'driver' => env('PROFILE_DRIVER'),
+            'root' => public_path().env('PROFILE_ROOT'),
+            'url' => env('APP_URL').env('PROFILE_URL'),
+            'visibility' => env('PROFILE_VISIBILITY'),
+        ],
+
+        'externo' => [
+            'driver' => env('EXTERNO_DRIVER'),
+            'root' => public_path().env('EXTERNO_ROOT'),
+            'url' => env('APP_URL').env('EXTERNO_URL'),
+            'visibility' => env('EXTERNO_VISIBILITY'),
+        ],
+
+        'denuncia' => [
+            'driver' => env('DENUNCIA_DRIVER'),
+            'root' => public_path().env('DENUNCIA_ROOT'),
+            'url' => env('APP_URL').env('DENUNCIA_URL'),
+            'visibility' => env('DENUNCIA_VISIBILITY'),
+        ],
+
+
     ],
 
     /*
