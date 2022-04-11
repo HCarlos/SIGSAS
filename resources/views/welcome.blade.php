@@ -108,7 +108,7 @@
 
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-justify">
-                                    Esta plataforma fue creada con personal de las siguientes instituciones:<br><br>
+                                    Esta plataforma fue creada con personal de las siguientes áeas:<br><br>
                                     A. Dirección del Sistema de Agua y Saneamiento<br>
                                     B. Coordinación de Modernización e Innovación
                                 </div>
