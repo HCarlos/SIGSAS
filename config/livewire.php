@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => env('APP_URL').'/public',
+    'asset_url' => 'https://sigsas.servimun.mx/public',
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return [
     |
     */
 
-    'app_url' => env('APP_URL'),
+    'app_url' => 'https://sigsas.servimun.mx',
 
     /*
     |--------------------------------------------------------------------------
