@@ -21,6 +21,8 @@
 
 {{--    @livewireStyles--}}
 
+    @stack('styles')
+
 </head>
 <body>
     <div id="app">
@@ -84,6 +86,7 @@
     </div>
 
 {{--    @livewireScripts--}}
+    @stack('scripts')
 
 </body>
 </html>
