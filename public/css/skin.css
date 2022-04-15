@@ -1,0 +1,14 @@
+.image-fondo-1{
+    background-image: url("/images/lab/Villahermosa_1.jpg") !important;
+}
+.bg-navbar-1{
+    background-color: #0c4128 !important;color: white !important;
+}
+.bg-navbar-1 a{
+    color: white !important;
+}
+.bg-navbar-1 a.logo-plataforma{
+    background: url('/images/logo-plataforma-1.png') !important;
+    width: 100px;
+    height: 40px;
+}

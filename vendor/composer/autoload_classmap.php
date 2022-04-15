@@ -74,6 +74,7 @@ return array(
     'App\\Listeners\\User\\LogLastLogin' => $baseDir . '/app/Listeners/User/LogLastLogin.php',
     'App\\Listeners\\User\\LogLastLogout' => $baseDir . '/app/Listeners/User/LogLastLogout.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Notifications\\HolaUser' => $baseDir . '/app/Notifications/HolaUser.php',
     'App\\Notifications\\MyResetPassword' => $baseDir . '/app/Notifications/MyResetPassword.php',
     'App\\Observers\\Catalogos\\Estatu\\PostUpdating' => $baseDir . '/app/Observers/Catalogos/Estatu/PostUpdating.php',
     'App\\Permission' => $baseDir . '/app/Permission.php',

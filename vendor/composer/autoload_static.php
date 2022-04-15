@@ -611,6 +611,7 @@ class ComposerStaticInit665e86f0207609fa630f8dfc010221af
         'App\\Listeners\\User\\LogLastLogin' => __DIR__ . '/../..' . '/app/Listeners/User/LogLastLogin.php',
         'App\\Listeners\\User\\LogLastLogout' => __DIR__ . '/../..' . '/app/Listeners/User/LogLastLogout.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Notifications\\HolaUser' => __DIR__ . '/../..' . '/app/Notifications/HolaUser.php',
         'App\\Notifications\\MyResetPassword' => __DIR__ . '/../..' . '/app/Notifications/MyResetPassword.php',
         'App\\Observers\\Catalogos\\Estatu\\PostUpdating' => __DIR__ . '/../..' . '/app/Observers/Catalogos/Estatu/PostUpdating.php',
         'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',

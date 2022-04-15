@@ -3,7 +3,7 @@
 /** @noinspection PhpFullyQualifiedNameUsageInspection */
 
 namespace Facade\Ignition\Facades {
-
+    
     /**
      * @see \Facade\FlareClient\Flare::applicationPath
      * @method static \Facade\FlareClient\Flare applicationPath(string $applicationPath)
@@ -66,7 +66,7 @@ namespace Facade\Ignition\Facades {
 }
 
 namespace Illuminate\Support\Facades {
-
+    
     /**
      * @see \Illuminate\Contracts\Foundation\Application::runningUnitTests
      * @method static bool runningUnitTests()
@@ -166,7 +166,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Support\ServiceProvider register(\Illuminate\Support\ServiceProvider|string $provider, bool $force = false)
      */
     class App {}
-
+    
     /**
      * @see \Illuminate\Contracts\Console\Kernel::all
      * @method static array all()
@@ -184,7 +184,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Foundation\Bus\PendingDispatch queue(string $command, array $parameters = [])
      */
     class Artisan {}
-
+    
     /**
      * @see \Illuminate\Auth\CreatesUserProviders::getDefaultUserProvider
      * @method static string getDefaultUserProvider()
@@ -246,7 +246,7 @@ namespace Illuminate\Support\Facades {
      * @method static bool|\Illuminate\Contracts\Auth\Authenticatable loginUsingId($id, bool $remember = false)
      */
     class Auth {}
-
+    
     /**
      * @see \Illuminate\View\Compilers\BladeCompiler::getCustomDirectives
      * @method static array getCustomDirectives()
@@ -322,13 +322,13 @@ namespace Illuminate\Support\Facades {
      * @method static string newComponentHash(string $component)
      */
     class Blade {}
-
+    
     /**
      * @see \Illuminate\Contracts\Broadcasting\Factory::connection
      * @method static \Illuminate\Contracts\Broadcasting\Broadcaster connection(null|string $name = null)
      */
     class Broadcast {}
-
+    
     /**
      * @see \Illuminate\Contracts\Bus\Dispatcher::getCommandHandler
      * @method static bool|mixed getCommandHandler($command)
@@ -346,7 +346,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Contracts\Bus\Dispatcher map(array $map)
      */
     class Bus {}
-
+    
     /**
      * @see \Psr\SimpleCache\CacheInterface::setMultiple
      * @method static bool setMultiple(iterable $values, \DateInterval|int|null $ttl = null)
@@ -446,7 +446,7 @@ namespace Illuminate\Support\Facades {
      * @method static mixed macroCall(string $method, array $parameters)
      */
     class Cache {}
-
+    
     /**
      * @see \Illuminate\Config\Repository::all
      * @method static array all()
@@ -472,7 +472,7 @@ namespace Illuminate\Support\Facades {
      * @method static void push(string $key, $value)
      */
     class Config {}
-
+    
     /**
      * @see \Illuminate\Support\Traits\Macroable::macro
      * @method static void macro(string $name, callable|object $macro)
@@ -506,7 +506,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Cookie\CookieJar flushQueuedCookies()
      */
     class Cookie {}
-
+    
     /**
      * @see \Illuminate\Encryption\Encrypter::getKey
      * @method static string getKey()
@@ -524,7 +524,7 @@ namespace Illuminate\Support\Facades {
      * @method static bool supported(string $key, string $cipher)
      */
     class Crypt {}
-
+    
     /**
      * @see \Illuminate\Database\Connection::logQuery
      * @method static void logQuery(string $query, array $bindings, float|null $time = null)
@@ -702,7 +702,7 @@ namespace Illuminate\Support\Facades {
      * @method static bool hasModifiedRecords()
      */
     class DB {}
-
+    
     /**
      * @see \Illuminate\Events\Dispatcher::dispatch
      * @method static array|null dispatch(object|string $event, $payload = [], bool $halt = false)
@@ -742,7 +742,7 @@ namespace Illuminate\Support\Facades {
      * @method static array getListeners(string $eventName)
      */
     class Event {}
-
+    
     /**
      * @see \Illuminate\Filesystem\Filesystem::ensureDirectoryExists
      * @method static void ensureDirectoryExists(string $path, int $mode = 0755, bool $recursive = true)
@@ -840,7 +840,7 @@ namespace Illuminate\Support\Facades {
      * @method static int append(string $path, string $data)
      */
     class File {}
-
+    
     /**
      * @see \Illuminate\Contracts\Auth\Access\Gate::allows
      * @method static bool allows(string $ability, array|mixed $arguments = [])
@@ -876,7 +876,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Contracts\Auth\Access\Gate policy(string $class, string $policy)
      */
     class Gate {}
-
+    
     /**
      * @see \Illuminate\Support\Manager::forgetDrivers
      * @method static \Illuminate\Support\Manager forgetDrivers()
@@ -908,7 +908,7 @@ namespace Illuminate\Support\Facades {
      * @method static array info(string $hashedValue)
      */
     class Hash {}
-
+    
     /**
      * @see \Illuminate\Http\Client\Factory::dd
      * @method static \Illuminate\Http\Client\PendingRequest dd()
@@ -1022,7 +1022,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      */
     class Http {}
-
+    
     /**
      * @see \Illuminate\Translation\Translator::parseKey
      * @method static array parseKey(string $key)
@@ -1074,7 +1074,7 @@ namespace Illuminate\Support\Facades {
      * @method static void setSelector(\Illuminate\Translation\MessageSelector $selector)
      */
     class Lang {}
-
+    
     /**
      * @see \Illuminate\Log\Logger::debug
      * @method static void debug(string $message, array $context = [])
@@ -1110,7 +1110,7 @@ namespace Illuminate\Support\Facades {
      * @method static void notice(string $message, array $context = [])
      */
     class Log {}
-
+    
     /**
      * @see \Illuminate\Mail\Mailer::alwaysReplyTo
      * @method static void alwaysReplyTo(string $address, null|string $name = null)
@@ -1194,7 +1194,7 @@ namespace Illuminate\Support\Facades {
      * @method static void assertNotSent(\Closure|string $mailable, callable|null $callback = null)
      */
     class Mail {}
-
+    
     /**
      * @see \Illuminate\Support\Manager::forgetDrivers
      * @method static \Illuminate\Support\Manager forgetDrivers()
@@ -1224,7 +1224,7 @@ namespace Illuminate\Support\Facades {
      * @method static array getDrivers()
      */
     class Notification {}
-
+    
     /**
      * @see \Illuminate\Testing\ParallelTesting::callSetUpTestCaseCallbacks
      * @method static void callSetUpTestCaseCallbacks(\Illuminate\Foundation\Testing\TestCase $testCase)
@@ -1256,7 +1256,7 @@ namespace Illuminate\Support\Facades {
      * @method static void setUpTestCase(callable $callback)
      */
     class ParallelTesting {}
-
+    
     /**
      * @see \Illuminate\Auth\Passwords\PasswordBroker::sendResetLink
      * @method static string sendResetLink(array $credentials, \Closure $callback = null)
@@ -1274,7 +1274,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Contracts\Auth\CanResetPassword|mixed|null|string reset(array $credentials, \Closure $callback)
      */
     class Password {}
-
+    
     /**
      * @see \Illuminate\Queue\QueueManager::addConnector
      * @method static void addConnector(string $driver, \Closure $resolver)
@@ -1338,7 +1338,7 @@ namespace Illuminate\Support\Facades {
      * @method static mixed getJobExpiration($job)
      */
     class Queue {}
-
+    
     /**
      * @see \Illuminate\Cache\RateLimiter::availableIn
      * @method static int availableIn(string $key)
@@ -1366,7 +1366,7 @@ namespace Illuminate\Support\Facades {
      * @method static mixed attempts(string $key)
      */
     class RateLimiter {}
-
+    
     /**
      * @see \Illuminate\Support\Traits\Macroable::macro
      * @method static void macro(string $name, callable|object $macro)
@@ -1408,7 +1408,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Routing\UrlGenerator getUrlGenerator()
      */
     class Redirect {}
-
+    
     /**
      * @see \Illuminate\Redis\Connections\Connection::throttle
      * @method static \Illuminate\Redis\Limiters\DurationLimiterBuilder throttle(string $name)
@@ -1464,7 +1464,7 @@ namespace Illuminate\Support\Facades {
      * @method static void flushMacros()
      */
     class Redis {}
-
+    
     /**
      * @see \Illuminate\Http\Request::hasValidSignature
      * @method static bool hasValidSignature($absolute = true)
@@ -1802,7 +1802,7 @@ namespace Illuminate\Support\Facades {
      * @method static array getLanguages()
      */
     class Request {}
-
+    
     /**
      * @see \Illuminate\Contracts\Routing\ResponseFactory::streamDownload
      * @method static \Symfony\Component\HttpFoundation\StreamedResponse streamDownload(\Closure $callback, null|string $name = null, array $headers = [], null|string $disposition = 'attachment')
@@ -1834,7 +1834,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Http\RedirectResponse redirectToAction(string $action, $parameters = [], int $status = 302, array $headers = [])
      */
     class Response {}
-
+    
     /**
      * @see \Illuminate\Routing\RouteRegistrar::scopeBindings
      * @method static \Illuminate\Routing\RouteRegistrar scopeBindings()
@@ -1998,7 +1998,7 @@ namespace Illuminate\Support\Facades {
      * @method static bool uses(...$patterns)
      */
     class Route {}
-
+    
     /**
      * @see \Illuminate\Database\Schema\Builder::disableForeignKeyConstraints
      * @method static bool disableForeignKeyConstraints()
@@ -2054,7 +2054,7 @@ namespace Illuminate\Support\Facades {
      * @method static bool createDatabase(string $name)
      */
     class Schema {}
-
+    
     /**
      * @see \Illuminate\Session\SessionManager::setDefaultDriver
      * @method static void setDefaultDriver(string $name)
@@ -2168,7 +2168,7 @@ namespace Illuminate\Support\Facades {
      * @method static void setId(string $id)
      */
     class Session {}
-
+    
     /**
      * @see \Illuminate\Filesystem\FilesystemManager::createS3Driver
      * @method static \Illuminate\Contracts\Filesystem\Cloud|\Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\FilesystemAdapter createS3Driver(array $config)
@@ -2240,7 +2240,7 @@ namespace Illuminate\Support\Facades {
      * @method static bool append(string $path, string $data)
      */
     class Storage {}
-
+    
     /**
      * @see \Illuminate\Routing\UrlGenerator::formatRoot
      * @method static string formatRoot(string $scheme, null|string $root = null)
@@ -2322,7 +2322,7 @@ namespace Illuminate\Support\Facades {
      * @method static string asset(string $path, bool|null $secure = null)
      */
     class URL {}
-
+    
     /**
      * @see \Illuminate\Validation\Factory::resolver
      * @method static void resolver(\Closure $resolver)
@@ -2352,7 +2352,7 @@ namespace Illuminate\Support\Facades {
      * @method static array validate(array $data, array $rules, array $messages = [], array $customAttributes = [])
      */
     class Validator {}
-
+    
     /**
      * @see \Illuminate\View\Concerns\ManagesLayouts::stopSection
      * @method static string stopSection(bool $overwrite = false)
@@ -2502,6 +2502,77 @@ namespace Illuminate\Support\Facades {
     class View {}
 }
 
+namespace Livewire {
+    
+    /**
+     * @see LivewireManager::dispatch
+     * @method static void dispatch($event, ...$params)
+     * @see LivewireManager::actingAs
+     * @method static LivewireManager actingAs(\Illuminate\Contracts\Auth\Authenticatable $user, $driver = null)
+     * @see LivewireManager::originalUrl
+     * @method static string originalUrl()
+     * @see LivewireManager::originalPath
+     * @method static array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\Request|\Illuminate\Support\Stringable|null|string|__anonymous@199 originalPath()
+     * @see LivewireManager::setBackButtonCache
+     * @method static void setBackButtonCache()
+     * @see LivewireManager::withQueryParams
+     * @method static LivewireManager withQueryParams($queryParams)
+     * @see LivewireManager::listen
+     * @method static void listen($event, $callback)
+     * @see LivewireManager::getAlias
+     * @method static int|mixed|null|string getAlias($class, $default = null)
+     * @see LivewireManager::isLivewireRequest
+     * @method static bool isLivewireRequest()
+     * @see LivewireManager::originalMethod
+     * @method static array|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\Request|null|string originalMethod()
+     * @see LivewireManager::getPersistentMiddleware
+     * @method static int|string[] getPersistentMiddleware()
+     * @see LivewireManager::scripts
+     * @method static string scripts($options = [])
+     * @see LivewireManager::getRootElementTagName
+     * @method static mixed getRootElementTagName($dom)
+     * @see LivewireManager::enableBackButtonCache
+     * @method static void enableBackButtonCache()
+     * @see LivewireManager::getComponentAliases
+     * @method static array getComponentAliases()
+     * @see LivewireManager::test
+     * @method static \Livewire\Testing\TestableLivewire test($name, $params = [])
+     * @see LivewireManager::getClass
+     * @method static false|mixed|null getClass($alias)
+     * @see LivewireManager::addPersistentMiddleware
+     * @method static void addPersistentMiddleware($middleware)
+     * @see LivewireManager::isRunningServerless
+     * @method static bool isRunningServerless()
+     * @see LivewireManager::isProbablyLivewireRequest
+     * @method static bool isProbablyLivewireRequest()
+     * @see LivewireManager::mount
+     * @method static void mount($name, $params = [])
+     * @see LivewireManager::disableBackButtonCache
+     * @method static void disableBackButtonCache()
+     * @see LivewireManager::shouldDisableBackButtonCache
+     * @method static bool shouldDisableBackButtonCache()
+     * @see LivewireManager::isOnVapor
+     * @method static bool isOnVapor()
+     * @see LivewireManager::component
+     * @method static void component($alias, $viewClass = null)
+     * @see LivewireManager::isDefinitelyLivewireRequest
+     * @method static bool isDefinitelyLivewireRequest()
+     * @see LivewireManager::setPersistentMiddleware
+     * @method static void setPersistentMiddleware($middleware)
+     * @see LivewireManager::flushState
+     * @method static void flushState()
+     * @see LivewireManager::styles
+     * @method static string styles($options = [])
+     * @see LivewireManager::visit
+     * @method static mixed visit($browser, $class, $queryString = '')
+     * @see LivewireManager::getInstance
+     * @method static mixed getInstance($component, $id)
+     * @see LivewireManager::dummyMount
+     * @method static string dummyMount($id, $tagName)
+     */
+    class Livewire {}
+}
+
 namespace {
     class App extends Illuminate\Support\Facades\App {}
     class Arr extends Illuminate\Support\Arr {}
@@ -2525,6 +2596,7 @@ namespace {
     class Http extends Illuminate\Support\Facades\Http {}
     class Js extends Illuminate\Support\Js {}
     class Lang extends Illuminate\Support\Facades\Lang {}
+    class Livewire extends Livewire\Livewire {}
     class Log extends Illuminate\Support\Facades\Log {}
     class Mail extends Illuminate\Support\Facades\Mail {}
     class Notification extends Illuminate\Support\Facades\Notification {}

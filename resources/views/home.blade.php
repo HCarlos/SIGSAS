@@ -1,7 +1,7 @@
-@extends('layouts.livewire-app')
+@extends('layouts.app')
 
 @section('content')
-    @livewire('users-table')
+    @livewire('users-table' style="background-image: url('{{asset("images/lab/Villahermosa_1.jpg")}}') !important;")
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
