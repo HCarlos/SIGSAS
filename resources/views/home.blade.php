@@ -1,24 +1,8 @@
-@extends('layouts.app')
-
+@extends('layouts.app_auth')
 @section('content')
-    @livewire('users-table' style="background-image: url('{{asset("images/lab/Villahermosa_1.jpg")}}') !important;")
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+    @include('layouts.partials.navbar')
+    @include('layouts.partials.left_sidebar')
+    <div class="main-content">
+        @yield('body-home')
     </div>
-</div>
 @endsection

@@ -1,53 +1,52 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm bg-navbar-1" >
-    <div class="container">
-        <a class="navbar-brand " href="{{ url('/') }}">
-            <img src="{{asset('images/logo-plataforma-1.png')}}" width="100" height="34">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-blue">
+    <div class="navbar-inner">
+
+        <div class="navbar-intro justify-content-xl-between">
+
+            <button type="button" class="btn btn-burger burger-arrowed static collapsed ml-2 d-flex d-xl-none" data-toggle-mobile="sidebar" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+                <span class="bars"></span>
+            </button><!-- mobile sidebar toggler button -->
+
+            <a class="navbar-brand text-white" href="#">
+                <i class="fa fa-leaf"></i>
+                <span>{{ config('app.name') }}</span>
+                <span></span>
+            </a><!-- /.navbar-brand -->
+
+            <button type="button" class="btn btn-burger mr-2 d-none d-xl-flex" data-toggle="sidebar" data-target="#sidebar" aria-controls="sidebar" aria-expanded="true" aria-label="Toggle sidebar">
+                <span class="bars"></span>
+            </button><!-- sidebar toggler button -->
+
+        </div><!-- /.navbar-intro -->
+
+
+        @include('SIGSAS.codes.navbar_search')
+
+        <!-- mobile #navbarMenu toggler button -->
+        <button class="navbar-toggler ml-1 mr-2 px-1" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navbar menu">
+            <span class="pos-rel">
+                  <img class="border-2 brc-white-tp1 radius-round" width="36" src="assets/image/avatar/avatar6.jpg" alt="Jason's Photo">
+                  <span class="bgc-warning radius-round border-2 brc-white p-1 position-tr mr-n1px mt-n1px"></span>
+            </span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
 
-            </ul>
+        <div class="navbar-menu collapse navbar-collapse navbar-backdrop" id="navbarMenu">
 
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
+            <div class="navbar-nav">
+                <ul class="nav">
 
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
+{{--                    @include('SIGSAS.codes.navbar_mega')--}}
+{{--                    @include('SIGSAS.codes.navbar_notifications')--}}
+{{--                    @include('SIGSAS.codes.navbar_tasks')--}}
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                    @include('SIGSAS.codes.navbar_profile')
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-        </div>
-    </div>
+                </ul><!-- /.navbar-nav menu -->
+            </div><!-- /.navbar-nav -->
+
+        </div><!-- /#navbarMenu -->
+
+
+    </div><!-- /.navbar-inner -->
 </nav>
