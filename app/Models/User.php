@@ -3,25 +3,22 @@
 namespace App\Models;
 
 use App\Filters\User\UserFilter;
-//use App\Models\Catalogos\Dependencia;
-//use App\Models\Catalogos\Domicilios\Ubicacion;
-//use App\Models\Denuncias\Imagene;
-//use App\Models\Denuncias\Respuesta;
-//use App\Models\Familias\Familia;
-//use App\Models\Familias\Parentesco;
-//use App\Models\Users\UserAdress;
-//use App\Models\Users\UserDataExtend;
+use App\Models\SIGSAS\Catalogos\Dependencia;
+use App\Models\SIGSAS\Catalogos\Domicilios\Ubicacion;
+use App\Models\SIGSAS\Denuncias\Imagene;
+use App\Models\SIGSAS\Denuncias\Respuesta;
+use App\Models\User\Permission;
+use App\Models\User\Role;
+use App\Models\User\UserAdress;
+use App\Models\User\UserDataExtend;
+use App\Models\User\UserSocial;
 use App\Notifications\MyResetPassword;
 use App\Traits\User\UserAttributes;
 use App\Traits\User\UserImport;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-//use Laravel\Passport\HasApiTokens;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
-//use App\Notifications\MyResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -68,6 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail
 //    ->orWhereRaw("UPPER(localidad) like ?", "%{$search}%");
 //})
 
+    public function scopeFilterBySearch($query, $filters){
+        return (new UserFilter())->applyTo($query, $filters);
+    }
 
     public function scopeFilterBy($query, $filters){
         return (new UserFilter())->applyTo($query, $filters);
@@ -84,6 +84,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles(){
         return $this->belongsToMany(Role::class);
     }
+    public function user_adress(){
+        return $this->hasOne(UserAdress::class);
+    }
+
+    public function user_data_extend(){
+        return $this->hasOne(UserDataExtend::class);
+    }
+
+    public function user_data_social(){
+        return $this->hasOne(UserSocial::class);
+    }
 
     public function dependencias(){
         return $this->belongsToMany(Dependencia::class);
@@ -95,14 +106,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function imagenes(){
         return $this->belongsToMany(Imagene::class,'imagene_user','imagene_id','user_id');
-    }
-
-    public function user_adress(){
-        return $this->hasOne(UserAdress::class);
-    }
-
-    public function user_data_extend(){
-        return $this->hasOne(UserDataExtend::class);
     }
 
     public function respuestas(){
@@ -121,6 +124,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->admin;
     }
 
+    public function isLogged(){
+        return $this->logged;
+    }
+
     public function isDelegado(){
         return $this->delegado;
     }
@@ -130,11 +137,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function IsEmptyPhoto(){
-        return $this->filename == '' ? true : false;
+        return $this->filename == '';
     }
 
     public function IsFemale(){
-        return $this->genero == 0 ? true : false;
+        return $this->genero == 0;
     }
 
     public function scopeMyID(){
@@ -145,9 +152,81 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->roles()->first();
     }
 
+//    public function Empresa(){
+//        return $this->hasOne(Empresa::class,'id','empresa_id');
+//    }
+
+    public function Creado_Por(){
+        return $this->hasOne(User::class,'id','creado_por_id');
+    }
+
     public function sendPasswordResetNotification($token){
         $this->notify(new MyResetPassword($token));
     }
+
+
+    public static function agregarConSeeder(
+        $nombre='', $ap_paterno='', $ap_materno='', $username='',
+        $curp='',$emails='',$celulares='',$telefonos='',$fecha_nacimiento=null,
+        $genero=1,
+        $empresa_id=1,
+        $creado_por_id=1,
+        $user_id_anterior=0,
+        $role_id=0,
+        $dataAdress=[],
+        $dataExtend=[]
+    ){
+        $user = static::where('username', trim($username))->first();
+        if (!$user) {
+            app()['cache']->forget('spatie.permission.cache');
+
+            $F = new GeneralFunctios();
+            $ip = 'root_agregarConSeeder';
+            $host = 'root_agregarConSeeder';
+
+            $user = new User();
+            $user->nombre = $nombre;
+            $user->ap_paterno = $ap_paterno;
+            $user->ap_materno = $ap_materno;
+            $user->username = $username;
+
+            $user->curp = $curp;
+            $user->emails = $emails;
+            $user->celulares = $celulares;
+            $user->telefonos = $telefonos;
+            $user->fecha_nacimiento = $fecha_nacimiento == "" ? null : $fecha_nacimiento;
+            $user->genero = $genero;
+
+            $user->email = $username . '@example.com';
+            $user->password = bcrypt($username);
+            $user->admin = 0;
+            $user->empresa_id = $empresa_id;
+            $user->creado_por_id = $creado_por_id;
+            $user->user_id_anterior = $user_id_anterior;
+            $user->ip = $ip;
+            $user->host = $host;
+            $user->email_verified_at = now();
+            $user->save();
+            $user->roles()->attach(3);
+            if ($role_id > 0) $user->roles()->attach($role_id);
+            $user->permissions()->attach(7);
+            $user->user_adress()->create($dataAdress);
+            $user->user_data_extend()->create($dataExtend);
+            $user->user_data_social()->create();
+            $F->validImage($user, 'profile', 'profile/');
+        }else{
+            if ($role_id > 0) {
+                $user->curp = $curp;
+                $user->save();
+                $user->roles()->detach($role_id);
+                $user->roles()->attach($role_id);
+            }
+        }
+
+        return $user;
+
+    }
+
 
 
 

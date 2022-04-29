@@ -11,30 +11,48 @@
         var aCol = [];
         aCol[nCols - 1] = {"sorting": false};
         if (aCol.length > 0 ){
-            $(".dataTable").DataTable({
+
+            // $.extend( true, $.fn.dataTable.defaults, {
+            //     dom:
+            //         "<'row'<'col-12 col-sm-6'l><'col-12 col-sm-6 text-right table-tools-col'f>>" +
+            //         "<'row'<'col-12'tr>>" +
+            //         "<'row'<'col-12 col-md-5'i><'col-12 col-md-7'p>>",
+            //     renderer: 'bootstrap'
+            // })
+
+            // var $_table = $(".dataTable").DataTable({
+            var $_table = $(".dataTable").DataTable({
                 searching: true,
                 paging: true,
                 info: true,
-                "pageLength": 50,
-                "order": [[ 0, "desc" ]],
-                "language": {
-                    "lengthMenu":  "Mostrando _MENU_ entradas",
-                    "sInfo":       "del _START_ al _END_ de un total de _TOTAL_ entradas",
-                    "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
-                    "sInfoEmpty":  "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "zeroRecords": "Busqueda sin resultados",
-                    "sSearch":     "Buscar:",
-                    "oPaginate": {
-                        "sFirst":    "Primero",
-                        "sLast":     "Último",
-                        "sNext":     "Siguiente",
-                        "sPrevious": "Anterior"
+                pageLength: 25,
+                order: [[ 0, "desc" ]],
+                language: {
+                    lengthMenu:  "Mostrando _MENU_ registros",
+                    sInfo:       "del _START_ al _END_ de un total de _TOTAL_ entradas",
+                    sInfoFiltered:  "(filtrado de un total de _MAX_ registros)",
+                    sInfoEmpty:  "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    zeroRecords: "Busqueda sin resultados",
+                    sSearch:     "Buscar:",
+                    oPaginate: {
+                        sFirst:    "Primero",
+                        sLast:     "Último",
+                        sNext:     "Siguiente",
+                        sPrevious: "Anterior"
                     },
-                    "info":        "Mostrando página _PAGE_ de _PAGES_"
+                    info:        "Mostrando página _PAGE_ de _PAGES_"
                 },
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-                "aoColumns": aCol
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                aoColumns: aCol
             });
+
+            // $('.table-tools-col' )
+            //     .append( $_table.buttons().container() )
+            //     // move searchbox into table header
+            //     .find('.dataTables_filter').appendTo('.page-tools').find('input').addClass('pl-45 radius-round').removeClass('form-control-sm')
+            //     // and add a "+" button
+            //     .end().append('<button data-rel="tooltip" type="button" class="btn radius-round btn-outline-primary border-2 btn-sm ml-2" title="Add New"><i class="fa fa-plus"></i></button>')
+
         }
 
     }

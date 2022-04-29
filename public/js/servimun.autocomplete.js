@@ -166,9 +166,9 @@ jQuery(function($) {
             }, "json" );
         }
 
-            $("#user_address_list").on('change',function(event){
-                 $("#ubicacion_nueva_id").val( $(this).val() );
-            });
+        $("#user_address_list").on('change',function(event){
+             $("#ubicacion_nueva_id").val( $(this).val() );
+        });
 
 
     });

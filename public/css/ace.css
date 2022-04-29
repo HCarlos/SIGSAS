@@ -18697,7 +18697,7 @@ a[data-toggle="collapse"]:not(.collapsed) .toggle-icon[class*="-right"], .accord
 .ace-aside.aside-center .modal-dialog {
   width: 500px;
   max-width: calc(100vw - 1rem);
-  max-height: calc(100% - );
+  max-height: calc(100% - 1rem);
   max-height: calc(100% - var(--navbar-height));
 }
 

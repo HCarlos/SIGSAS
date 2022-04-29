@@ -3,7 +3,7 @@
 /*@import url('https://fonts.googleapis.com/css?family=Varela+Round');*/
 
 
-.dataTable { max-width: 1200px !important; }
+/*.dataTable { max-width: 1200px !important; }*/
 
 .full-height {
 	height: 100vh;
@@ -207,11 +207,11 @@ ul.role-list-hrz li a {
 	font-weight: bolder !important;
 }
 
-.dropdown-menu > a:hover{
-	background-color: darkslategray !important;
-	color: whitesmoke !important;
-	/*font-weight: bolder !important;*/
-}
+/*.dropdown-menu > a:hover{*/
+/*	background-color: darkslategray !important;*/
+/*	color: whitesmoke !important;*/
+/*	!*font-weight: bolder !important;*!*/
+/*}*/
 
 .separator-atemun-2em{
 	display:inline-block !important;

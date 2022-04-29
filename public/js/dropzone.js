@@ -3214,7 +3214,7 @@ if (typeof module !== 'undefined' && module !== null) {
   window.Dropzone = Dropzone;
 }
 
-// Dropzone file status codes
+// Dropzone file status Codes
 Dropzone.ADDED = "agregado";
 
 Dropzone.QUEUED = "queued";

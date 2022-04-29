@@ -8,8 +8,8 @@
 
 namespace App\Filters\User;
 
+use App\Classes\GeneralFunctions;
 use App\Filters\Common\QueryFilter;
-use App\Http\Controllers\Funciones\FuncionesController;
 
 class UserFilter extends QueryFilter {
 
@@ -25,7 +25,7 @@ class UserFilter extends QueryFilter {
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search   = strtoupper($search);
         $filters  = $search;
-        $F        = new FuncionesController();
+        $F        = new GeneralFunctions();
         $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
         return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$tsString]);
 //            ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$tsString]);
