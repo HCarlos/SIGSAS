@@ -164,12 +164,12 @@ class UserController extends Controller{
             $id = $Obj->id;
         }
 
-        $this->msg = "";
+        $this->msg = "Datos guardados con éxito!";
 
         $user = User::find($id);
         $Ubicaciones_Usuario = $user->ubicaciones;
 
-        session(['msg' => 'value']);
+        session(['msg' => $this->msg]);
         return view('SIGSAS.User.user_profile_edit',[
 //            "item"     => $Obj,
 //            "User"     => $user,
