@@ -9,9 +9,9 @@
 namespace App\Classes;
 
 
-use App\User;
+//use App\Models\User;
 use Illuminate\Http\Request;
-use App\Role;
+//use App\Role;
 use Illuminate\Support\Facades\Auth;
 
 class FiltersRules

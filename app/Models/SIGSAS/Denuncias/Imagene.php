@@ -6,7 +6,7 @@ use App\Traits\Denuncia\ImageneTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 
 class Imagene extends Model{
     use SoftDeletes;

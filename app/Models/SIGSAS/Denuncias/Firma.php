@@ -2,7 +2,7 @@
 
 namespace App\Models\SIGSAS\Denuncias;
 
-use App\Traits\Denuncia\ImageneTrait;
+//use App\Traits\Denuncia\ImageneTrait;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

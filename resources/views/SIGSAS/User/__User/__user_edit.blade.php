@@ -174,8 +174,6 @@
 
 
 <input type="hidden" name="username" id="username" value="{{ $items->username }}"  />
-{{--<input type="hidden" name="email" id="email" value="{{ $items->email }}"  />--}}
-{{--<input type="hidden" name="curp" id="curp" value="{{ $items->curp }}"  />--}}
 <input type="hidden" name="ubicacion_actual_id" id="ubicacion_actual_id" value="{{ $items->ubicacion_id }}" >
 <input type="hidden" name="ubicacion_nueva_id" id="ubicacion_nueva_id" value="{{ $items->ubicacion_id }}" >
 <input type="hidden" name="id" value="{{$items->id}}" >

@@ -13,8 +13,9 @@
 
 
 @yield('scripts')
-{{--@yield('script_autocomplete')--}}
 
 <script src="{{ asset('js/atemun.js') }}"></script>
 <script src="{{ asset('js/servimun.js') }}"></script>
-<script src="{{ asset('js/servimun.autocomplete.js') }}"></script>
+{{--<script src="{{ asset('js/servimun.autocomplete.js') }}"></script>--}}
+
+@yield('script_autocomplete')

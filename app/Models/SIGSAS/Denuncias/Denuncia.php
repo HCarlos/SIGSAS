@@ -5,15 +5,15 @@
 
 namespace App\Models\SIGSAS\Denuncias;
 
-use App\Filters\Denuncia\DenunciaFilter;
-use App\Filters\Denuncia\GetDenunciasFilterCount;
-use App\Filters\Denuncia\GetDenunciasItemCustomFilter;
-use App\Models\SIGSAS\Catalogos\Dependencia;
-use App\Models\SIGSAS\Catalogos\Domicilios\Ubicacion;
-use App\Models\SIGSAS\Catalogos\Estatu;
-use App\Models\SIGSAS\Catalogos\Origen;
-use App\Models\SIGSAS\Catalogos\Prioridad;
-use App\Models\SIGSAS\Catalogos\Servicio;
+use App\Filters\SIGSAS\Denuncia\DenunciaFilter;
+use App\Filters\SIGSAS\Denuncia\GetDenunciasFilterCount;
+use App\Filters\SIGSAS\Denuncia\GetDenunciasItemCustomFilter;
+use App\Models\SIGSAS\Estructura\Dependencia;
+use App\Models\SIGSAS\Domicilios\Ubicacion;
+use App\Models\SIGSAS\Estructura\Estatu;
+use App\Models\SIGSAS\Estructura\Origen;
+use App\Models\SIGSAS\Estructura\Prioridad;
+use App\Models\SIGSAS\Estructura\Servicio;
 use App\Traits\Denuncia\DenunciaTrait;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;

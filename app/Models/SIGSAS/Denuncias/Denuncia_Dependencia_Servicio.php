@@ -2,11 +2,11 @@
 
 namespace App\Models\SIGSAS\Denuncias;
 
-use App\Models\SIGSAS\Catalogos\Estatu;
-use App\Models\SIGSAS\Catalogos\Servicio;
+use App\Models\SIGSAS\Estructura\Estatu;
+use App\Models\SIGSAS\Estructura\Servicio;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use phpDocumentor\Reflection\Types\Boolean;
+//use phpDocumentor\Reflection\Types\Boolean;
 
 class Denuncia_Dependencia_Servicio extends Model
 {

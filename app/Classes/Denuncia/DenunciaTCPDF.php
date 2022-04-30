@@ -21,6 +21,9 @@ use App\Traits\TCPDF\InitTrait;
 use TCPDF;
 use TCPDF_COLORS;
 use TCPDF_STATIC;
+//use TCPDF;
+//use TCPDF_COLORS;
+//use TCPDF_STATIC;
 
 class DenunciaTCPDF extends TCPDF{
 

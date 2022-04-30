@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b920f53fdec447c4ec71a182eab87a016b8c92d2',
+        'reference' => '1857164c6f65834d2565d337922695880226b985',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -418,7 +418,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b920f53fdec447c4ec71a182eab87a016b8c92d2',
+            'reference' => '1857164c6f65834d2565d337922695880226b985',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -1296,6 +1296,15 @@
             'install_path' => __DIR__ . '/../symfony/var-dumper',
             'aliases' => array(),
             'reference' => 'cdcadd343d31ad16fc5e006b0de81ea307435053',
+            'dev_requirement' => false,
+        ),
+        'tecnickcom/tcpdf' => array(
+            'pretty_version' => '6.4.4',
+            'version' => '6.4.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tecnickcom/tcpdf',
+            'aliases' => array(),
+            'reference' => '42cd0f9786af7e5db4fcedaa66f717b0d0032320',
             'dev_requirement' => false,
         ),
         'theseer/tokenizer' => array(

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SIGSAS\Domicilio\UbicacionController;
 use App\Http\Controllers\SIGSAS\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,8 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::get('userList/',[UserController::class,'index'])->name('userList');
     Route::get('editUser/{Id}', [UserController::class,'editItem'])->name('editUser');
     Route::put('updateUser', [UserController::class,'updateItem'])->name('updateUser');
+    Route::get('searchAdress/', [UbicacionController::class, 'searchAdress'])->name('searchAdress');
+    Route::get('getUbi/{IdUbi}', [UbicacionController::class,'getUbi'])->name('getUbi');
 
 
 
@@ -69,6 +72,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::get('newUser', 'Catalogos\User\UserDataController@newUser')->name('newUser');
     Route::post('createUser', 'Catalogos\User\UserDataController@createUser')->name('createUser');
     Route::get('removeUser/{id}', 'Catalogos\User\UserDataController@removeUser')->name('removeUser');
+
+
+
 
 
 

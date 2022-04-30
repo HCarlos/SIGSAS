@@ -1,9 +1,9 @@
 <?php
 namespace App\Classes;
 
-use FPDF;
+use TCPDF;
 
-class sector extends FPDF
+class sector extends TCPDF
 {
 
 	var $B;

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\SIGSAS\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SIGSAS\UserRequest;
+use App\Http\Requests\SIGSAS\User\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
+//use Illuminate\Support\Facades\Response;
 use Spatie\Permission\Models\Role;
 
 
@@ -171,24 +171,12 @@ class UserController extends Controller{
 
         session(['msg' => $this->msg]);
         return view('SIGSAS.User.user_profile_edit',[
-//            "item"     => $Obj,
-//            "User"     => $user,
-//            "titulo"   => "Editando el registro: ".$id,
-//            'Route'    => 'updateUsuario',
-//            'Method'   => 'POST',
-//            'msg'      => $this->msg,
-//            'IsUpload' => false,
-//            'IsNew'    => false,
-//            'createItem' => 'addRoleItem',
-//            'removeItem' => 'removeRoleUsuario',
-
             'user'              => $user,
             'items'             => $Obj,
             'user_address_list' => $Ubicaciones_Usuario,
             'titulo_catalogo'   => "Catálogo de Usuarios",
             'titulo_header'     => 'Editando el Folio '.$id,
             'msg'               => $this->msg,
-
         ]);
 
     }

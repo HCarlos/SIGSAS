@@ -5,15 +5,15 @@
 
 namespace App\Classes;
 
-use App\Models\Catalogos\Area;
-use App\Models\Catalogos\Domicilios\Ubicacion;
-use App\Models\Catalogos\Estatu;
-use App\Models\Catalogos\Origen;
-use App\Models\Catalogos\Prioridad;
-use App\Models\Catalogos\Servicio;
-use App\Models\Catalogos\Subarea;
-use App\Models\Denuncias\Denuncia;
-use App\User;
+use App\Models\SIGSAS\Estructura\Area;
+//use App\Models\SIGSAS\Domicilios\Ubicacion;
+//use App\Models\SIGSAS\Estructura\Estatu;
+//use App\Models\SIGSAS\Estructura\Origen;
+//use App\Models\SIGSAS\Estructura\Prioridad;
+use App\Models\SIGSAS\Estructura\Servicio;
+use App\Models\SIGSAS\Estructura\Subarea;
+use App\Models\SIGSAS\Denuncias\Denuncia;
+//use App\Models\User;
 use Illuminate\Support\Facades\Response;
 
 class RemoveItemSafe

@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Filters\User\UserFilter;
-use App\Models\SIGSAS\Catalogos\Dependencia;
-use App\Models\SIGSAS\Catalogos\Domicilios\Ubicacion;
+use App\Models\SIGSAS\Estructura\Dependencia;
+use App\Models\SIGSAS\Domicilios\Ubicacion;
 use App\Models\SIGSAS\Denuncias\Imagene;
 use App\Models\SIGSAS\Denuncias\Respuesta;
 use App\Models\User\Permission;

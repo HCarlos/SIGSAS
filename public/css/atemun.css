@@ -679,3 +679,24 @@ input[readonly] {
 .text-warning-reload {
     color: coral !important;
 }
+
+.table-profile{
+    table-layout: fixed !important;
+    width: 100% !important;
+    background-color: #0acf97 !important;
+}
+
+.table-profile th.icon-profile, .table-profile td.icon-profile {
+    overflow: hidden !important;
+    width: 10% !important;
+}
+
+.table-profile th.field-profile, .table-profile td.field-profile {
+    overflow: hidden !important;
+    width: 30% !important;
+}
+
+.table-profile th.value-profile, .table-profile td.value-profile {
+    overflow: hidden !important;
+    width: 70% !important;
+}
