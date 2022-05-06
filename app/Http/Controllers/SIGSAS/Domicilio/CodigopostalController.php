@@ -29,7 +29,7 @@ class CodigopostalController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.cp.cp_list',
+        return view('SIGSAS.Domicilio.cp.cp_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -50,7 +50,7 @@ class CodigopostalController extends Controller
 // ***************** CREA UN NUEVO CÓDIGO POSTAL  ++++++++++++++++++++ //
     protected function newItem()
     {
-        return view('catalogos.catalogo.domicilio.cp.cp_new',
+        return view('SIGSAS.Domicilio.cp.cp_new',
             [
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createCodigopostal',
@@ -75,12 +75,12 @@ class CodigopostalController extends Controller
     {
 
         $user = Auth::user();
-        return view('SIAC._comun.__modal_comun_1',
+        return view('SIGSAS._comun.__modal_comun_1',
             [
                 'Titulo'      => 'Nueva',
                 'Route'       => 'createCodigopostalV2',
                 'Method'      => 'POST',
-                'items_forms' => 'SIAC.domicilio.cp.__cp.__cp_new',
+                'items_forms' => 'SIGSAS.Domicilio.cp.__cp.__cp_new',
                 'IsNew'       => true,
                 'user'        => $user,
             ]
@@ -109,7 +109,7 @@ class CodigopostalController extends Controller
     protected function editItem($Id)
     {
         $item = Codigopostal::find($Id);
-        return view('catalogos.catalogo.domicilio.cp.cp_edit',
+        return view('SIGSAS.Domicilio.cp.cp_edit',
             [
                 'user' => Auth::user(),
                 'items' => $item,
@@ -135,12 +135,12 @@ class CodigopostalController extends Controller
     {
         $item = Codigopostal::find($Id);
         $user = Auth::user();
-        return view('SIAC._comun.__modal_comun_1',
+        return view('SIGSAS._comun.__modal_comun_1',
             [
                 'Titulo'      => 'Editando el Item. '.$Id,
                 'Route'       => 'updateCodigopostalV2',
                 'Method'      => 'POST',
-                'items_forms' => 'SIAC.domicilio.cp.__cp.__cp_edit',
+                'items_forms' => 'SIGSAS.Domicilio.cp.__cp.__cp_edit',
                 'IsNew'       => false,
                 'IsModal'     => true,
                 'items'       => $item,

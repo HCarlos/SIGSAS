@@ -13,15 +13,15 @@
 namespace App\Traits\Denuncia;
 
 
-use App\Models\Catalogos\Domicilios\Calle;
-use App\Models\Catalogos\Domicilios\Ciudad;
-use App\Models\Catalogos\Domicilios\Codigopostal;
-use App\Models\Catalogos\Domicilios\Colonia;
-use App\Models\Catalogos\Domicilios\Comunidad;
-use App\Models\Catalogos\Domicilios\Estado;
-use App\Models\Catalogos\Domicilios\Municipio;
-use App\Models\Catalogos\Domicilios\Ubicacion;
-use App\User;
+use App\Models\SIGSAS\Domicilios\Calle;
+use App\Models\SIGSAS\Domicilios\Ciudad;
+use App\Models\SIGSAS\Domicilios\Codigopostal;
+use App\Models\SIGSAS\Domicilios\Colonia;
+use App\Models\SIGSAS\Domicilios\Comunidad;
+use App\Models\SIGSAS\Domicilios\Estado;
+use App\Models\SIGSAS\Domicilios\Municipio;
+use App\Models\SIGSAS\Domicilios\Ubicacion;
+use App\Models\User;
 
 trait DenunciaTrait
 {

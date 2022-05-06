@@ -1,13 +1,13 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.home')
     @slot('titulo_catalogo',$titulo_catalogo)
     @slot('titulo_header','Ver mi perfil')
     @slot('contenido')
         <div class="col-md-4">
-            @include('shared.catalogo.user.__user_photo_header')
+            @include('SIGSAS.User.__User.__user_photo_header')
         </div> <!-- end col-->
 
         <div class="col-md-8">
@@ -15,10 +15,10 @@
             @component('components.card-sin-fondo')
                 @slot('title_card',Auth::user()->FullName)
                 @slot('body_card')
-                    @include('shared.code.__errors')
+                    @include('SIGSAS.xFiles.Codes.__errors')
                     <form method="POST" action="#">
-                        @include('shared.catalogo.user.__user_solo_lectura')
-                        @include('shared.ui_kit.__button_form_normal')
+                        @include('SIGSAS.User.__User.__user_solo_lectura')
+                        @include('SIGSAS.xFiles.UI_Kit.__button_form_normal')
                     </form>
                 @endslot
             @endcomponent

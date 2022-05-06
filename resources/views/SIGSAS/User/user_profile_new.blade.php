@@ -1,24 +1,22 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.home')
     @slot('titulo_catalogo',$titulo_catalogo)
     @slot('titulo_header','Usuario')
     @slot('contenido')
-        <div class="col-md-4">
-        </div> <!-- end col-->
 
-        <div class="col-md-8">
-            <!-- Chart-->
+        <div class="col-md-12">
             @component('components.card')
-                @slot('title_card','')
+                @slot('titulo_catalogo',$titulo_catalogo ?? '')
+                @slot('title_card', $titulo_header ?? '')
                 @slot('body_card')
-                    @include('shared.code.__errors')
+                    @include('SIGSAS.xFiles.Codes.__errors')
                     <form method="POST" action="{{ route('createUser') }}">
                         @csrf
-                        @include('shared.catalogo.user.__user_new')
-                        @include('shared.ui_kit.__button_form_normal')
+                        @include('SIGSAS.User.__User.__user_new')
+                        @include('SIGSAS.xFiles.UI_Kit.__button_form_normal')
                     </form>
                 @endslot
             @endcomponent

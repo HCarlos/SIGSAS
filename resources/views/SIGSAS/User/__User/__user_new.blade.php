@@ -26,10 +26,6 @@
     <div class="tab-pane active show" id="Profile1">
 
         <div class="form-group row mb-3">
-{{--            <label for = "username" class="col-md-3 col-form-label">Username</label>--}}
-{{--            <div class="col-md-9">--}}
-{{--                <input type="text" name="username" id="username" value="{{ old('username') }}" class="form-control"  />--}}
-{{--            </div>--}}
             <label for = "email" class="col-md-3 col-form-label">Email</label>
             <div class="col-md-9">
                 <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control"   />
@@ -70,9 +66,10 @@
             </div>
         </div>
 
-
-
     </div>
+
+
+
     <div class="tab-pane" id="Domicilio1">
         <div class="form-group row mb-3">
             <label for = "calle" class="col-md-3 col-form-label">UBICACIONES: </label>
@@ -80,7 +77,7 @@
                 <div class="input-group">
                     {!! Form::text('search_autocomplete',null, array('placeholder' => 'Buscar ubicación...','class' => 'form-control search_autocomplete','id'=>'search_autocomplete')) !!}
                     <span class="input-group-append">
-                        <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                        <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="fa fa-plus"></i></a>
                     </span>
                 </div>
                 <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion') }}" class="form-control" disabled/>

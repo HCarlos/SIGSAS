@@ -1,6 +1,12 @@
 
 /*  DataTable Pagination  */
 
+
+
+.ui-autocomplete-loading {
+    background: white url('/images/web/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
     cursor: default;
     color: #666 !important;

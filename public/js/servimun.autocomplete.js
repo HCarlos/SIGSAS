@@ -10,15 +10,15 @@ jQuery(function($) {
 
         $("#editUser").prop('readonly',true);
 
-        // var Objs = ["#search_autocomplete","#search_autocomplete_user",".search_autocomplete_user","#search_autocomplete_calle","#search_autocomplete_colonia","#search_autocomplete_cp","#search_autocomplete_comunidad"];
-        // var Urls = ["/searchAdress","/searchUser","/searchUser","/buscarCalle","/buscarColonia","/buscarCodigopostal","/buscarComunidad"];
-        // var Gets = ["/getUbi/","/getUser/","/getUser/","/getCalle/","/getColonia/","/getCodigopostal/","/getComunidad/"];
-        // var Ids =  ["id","id","id","id","id","id","id"];
+        var Objs = ["#search_autocomplete","#search_autocomplete_user",".search_autocomplete_user","#search_autocomplete_calle","#search_autocomplete_colonia","#search_autocomplete_cp","#search_autocomplete_comunidad"];
+        var Urls = ["/searchAdress","/searchUser","/searchUser","/buscarCalle","/buscarColonia","/buscarCodigopostal","/buscarComunidad"];
+        var Gets = ["/getUbi/","/getUser/","/getUser/","/getCalle/","/getColonia/","/getCodigopostal/","/getComunidad/"];
+        var Ids =  ["id","id","id","id","id","id","id"];
 
-        var Objs = ["#search_autocomplete"];
-        var Urls = ["/searchAdress"];
-        var Gets = ["/getUbi/"];
-        var Ids =  ["id"];
+        // var Objs = ["#search_autocomplete"];
+        // var Urls = ["/searchAdress"];
+        // var Gets = ["/getUbi/"];
+        // var Ids =  ["id"];
 
         // alert(Ids.length);
 

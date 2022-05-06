@@ -3,9 +3,10 @@
 namespace App\Classes;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Intervention\Image\Exception\NotWritableException;
 use Intervention\Image\Facades\Image;
 
@@ -253,6 +254,19 @@ class GeneralFunctions extends App {
         return $pass0;
     }
 
+    public function setSaveItem(Request $request){
+        $Obj = $request->manage();
+        if (!is_object($Obj)) {
+            $id = $request->all(['id']);
+            $redirect = 'editComunidadV2/' . $id;
+            return redirect($redirect)
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
 
 
 }

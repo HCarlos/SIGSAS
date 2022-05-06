@@ -8,7 +8,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     </div>
     <div class="modal-body">
-        @include('shared.code.__errors_modal')
+        @include('SIGSAS.xFiles.Codes.__errors_modal')
         @include( $items_forms )
     </div>
     <div class="modal-footer">
@@ -20,4 +20,4 @@
         </button>
     </div>
 </form>
-@include('shared.code.__ajax_form_full_modal_with_errors')
+@include('SIGSAS.xFiles.Codes.__ajax_form_full_modal_with_errors')

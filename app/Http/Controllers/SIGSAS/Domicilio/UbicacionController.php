@@ -4,11 +4,7 @@ namespace App\Http\Controllers\SIGSAS\Domicilio;
 
 use App\Classes\GeneralFunctions;
 use App\Models\SIGSAS\Domicilios\Calle;
-//use App\Models\SIGSAS\Domicilios\Ciudad;
 use App\Models\SIGSAS\Domicilios\Colonia;
-//use App\Models\SIGSAS\Domicilios\Estado;
-//use App\Models\SIGSAS\Domicilios\Localidad;
-//use App\Models\SIGSAS\Domicilios\Municipio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\SIGSAS\Domicilios\Codigopostal;
@@ -37,7 +33,7 @@ class UbicacionController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.ubicacion.ubicacion_list',
+        return view('SIGSAS.Domicilio.ubicacion.ubicacion_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -57,13 +53,13 @@ class UbicacionController extends Controller
 // ***************** EDITA LOS DATOS  ++++++++++++++++++++ //
     protected function editItem($Id){
         $item            = Ubicacion::find($Id);
-//        dd($item);
+
         $Calles          = Calle::all()->sortBy('calle')->pluck('calle','id');
         $Colonias        = Colonia::all()->sortBy('colonia')->pluck('colonia','id');
         $Comunidades     = Comunidad::all()->sortBy('comunidad')->pluck('comunidad','id');
         $Codigospostales = Codigopostal::all()->sortBy('cp')->pluck('cp','id');
 
-        return view('catalogos.catalogo.domicilio.ubicacion.ubicacion_edit',
+        return view('SIGSAS.Domicilio.ubicacion.ubicacion_edit',
             [
                 'user' => Auth::user(),
                 'calles'          => $Calles,
@@ -104,7 +100,7 @@ class UbicacionController extends Controller
         $Colonias        = Colonia::all()->sortBy('colonia');
         $Comunidades     = Comunidad::all()->sortBy('comunidad');
         $Codigospostales = Codigopostal::all()->sortBy('cp');
-        return view('catalogos.catalogo.domicilio.ubicacion.ubicacion_new',
+        return view('SIGSAS.Domicilio.ubicacion.ubicacion_new',
             [
                 'editItemTitle'   => 'Nuevo',
                 'calles'          => $Calles,
@@ -126,7 +122,7 @@ class UbicacionController extends Controller
         $Codigospostales = Codigopostal::all()->sortBy('cp');
         $user            = Auth::user();
 
-        return view('SIAC.domicilio.ubicacion.ubicacion_new',
+        return view('SIGSAS.Domicilio.ubicacion.ubicacion_new',
             [
                 'calles'          => $Calles,
                 'colonias'        => $Colonias,
@@ -134,7 +130,7 @@ class UbicacionController extends Controller
                 'codigospostales' => $Codigospostales,
                 'Method'          => 'POST',
                 'Route'           => 'createUbicacionV2',
-                'items_forms'     => 'SIAC.domicilio.ubicacion.__ubicacion.__ubicacion_new',
+                'items_forms'     => 'SIGSAS.Domicilio.ubicacion.__ubicacion.__ubicacion_new',
                 'IsNew'           => true,
                 'user'            => $user,
             ]

@@ -9,7 +9,7 @@
 namespace App\Traits\Common;
 
 
-use App\User;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 trait CommonTrait

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\SIGSAS\User;
 
+use App\Classes\GeneralFunctions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SIGSAS\User\UserRequest;
+use App\Http\Requests\SIGSAS\User\UserUpdatePasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Response;
 use Spatie\Permission\Models\Role;
 
 
@@ -84,55 +86,69 @@ class UserController extends Controller{
 
 
     }
-//
-//
-//    protected function newItem(){
-//
-//        $user = Auth::user();
-//        $roles = Role::query()->where('id','>',3)->orderBy('name') ->pluck('name','abreviatura')->toArray();
-//        //dd($roles);
-//        return view('layouts.User.generales._user_edit',[
-//            "item"     => null,
-//            "User"     => $user,
-//            "Roles"    => $roles,
-//            "titulo"   => "Nuevo registro ",
-//            'Route'    => 'createUsuario',
-//            'Method'   => 'POST',
-//            'msg'      => $this->msg,
-//            'IsUpload' => false,
-//            'IsNew'    => true,
-//        ]);
-//
-//    }
-//
-//    protected function createItem(UserRequest $request) {
-//        //dd($request);
-//        $Obj = $request->manageUser();
-//        if (!is_object($Obj)) {
-//            $id = 0;
-//            return redirect('newUsuario')
-//                ->withErrors($Obj)
-//                ->withInput();
-//        }else{
-//            $id = $Obj->id;
-//        }
-//        $user = Auth::user();
-//        session(['msg' => 'value']);
-//        return view('layouts.User.generales._user_edit',[
-//            "item"     => $Obj,
-//            "User"     => $user,
-//            "titulo"   => "Editando el registro: ".$id,
-//            'Route'    => 'updateUsuario',
-//            'Method'   => 'POST',
-//            'msg'      => $this->msg,
-//            'IsUpload' => false,
-//            'IsNew'    => false,
-//            'createItem' => 'addRoleItem',
-//            'removeItem' => 'removeRoleUsuario',
-//        ]);
-//
-//    }
-//
+
+// ***************** EDITA LOS DATOS DEL USUARIO SOLO LECTURA ++++++++++++++++++++ //
+    protected function showEditUserData()
+    {
+        $user = Auth::user();
+        $this->msg = "";
+        return view('SIGSAS.User.user_profile_solo_lectura',
+            [
+                'user' => $user,
+                'items' => $user,
+                'titulo_catalogo' => "Catálogo de Usuarios",
+                'titulo_header'   => 'Editando datos',
+                'msg'             => $this->msg,
+            ]
+        );
+    }
+
+
+    protected function newItem(){
+        $this->msg = "";
+        return view('SIGSAS.User.user_profile_new',
+            [
+                'titulo_catalogo' => 'Catálogo de Usuarios',
+                'titulo_header'   => 'Nuevo Usuario ',
+                'postNew'         => 'createUser',
+                'msg'             => $this->msg,
+            ]
+        );
+
+    }
+
+    protected function createItem(UserRequest $request) {
+
+        $Data = $request->all(['id']);
+        $Obj = $request->manageUser();
+
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('newUser')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+
+        session(['msg' => $this->msg]);
+        $user = is_null($Obj) || trim($Obj) == "" ? User::all()->last() : $Obj;
+        $Ubicaciones_Usuario = $user->ubicaciones;
+
+        return view('SIGSAS.User.user_profile_edit',
+            [
+                'user'              => $user,
+                'items'             => $user,
+                'titulo_catalogo'   => $user->Fullname ?? '' ,
+                'user_address_list' => $Ubicaciones_Usuario,
+                'titulo_header'     => 'Editando...',
+                'putEdit'           => 'EditUser',
+                'msg'               => $this->msg,
+            ]
+        );
+
+    }
+
 
     protected function editItem($Id){
 
@@ -153,63 +169,207 @@ class UserController extends Controller{
 
     }
 
-    protected function updateItem(UserRequest $request) {
+
+// ***************** GUARDA LOS CAMBIOS EN EL USUARIO ++++++++++++++++++++ //
+    protected function update(UserRequest $request)
+    {
         $Obj = $request->manageUser();
         if (!is_object($Obj)) {
             $id = 0;
-            return redirect('editUsuario')
+            return redirect('editUser')
                 ->withErrors($Obj)
                 ->withInput();
         }else{
             $id = $Obj->id;
         }
 
-        $this->msg = "Datos guardados con éxito!";
-
-        $user = User::find($id);
-        $Ubicaciones_Usuario = $user->ubicaciones;
-
+        $this->msg = "Registro Guardado con éxito!";
         session(['msg' => $this->msg]);
-        return view('SIGSAS.User.user_profile_edit',[
-            'user'              => $user,
-            'items'             => $Obj,
-            'user_address_list' => $Ubicaciones_Usuario,
-            'titulo_catalogo'   => "Catálogo de Usuarios",
-            'titulo_header'     => 'Editando el Folio '.$id,
-            'msg'               => $this->msg,
-        ]);
+        return redirect()->route('listUsers');
+    }
+
+
+    protected function updateItem(UserRequest $request) {
+        $Data = $request->all(['id']);
+        $Obj = $request->manageUser();
+
+        if (!is_object($Obj)) {
+            $id = 0;
+            return redirect('editUser')
+                ->withErrors($Obj)
+                ->withInput();
+        }else{
+            $id = $Obj->id;
+        }
+        session(['msg' => $this->msg]);
+        return redirect()->route('listUsers');
+    }
+
+    protected function updateItemV2(UserRequest $request)
+    {
+
+        $Data = $request->all(['id']);
+        //dd($UserId);
+        $user = $request->manageUser();
+        if (!isset($user) || !is_object($user)) {
+            $this->msg = $user;
+            $user = User::find($Data['id']);
+        } else {
+            $this->msg = "Registro Guardado con éxito!!!";
+        }
+        session(['msg' => $this->msg]);
+
+        return redirect()->route('editUser', ['Id' => $request->all('id')]);
+
+    }
+
+    // ***************** ELIMINA AL USUARIO VIA AJAX ++++++++++++++++++++ //
+    protected function removeItem($Id = 0, $dato1 = null, $dato2 = null){
+
+        If ($id > 3){
+            $user = User::withTrashed()->findOrFail($id);
+            if (isset($user)) {
+                if (!$user->trashed()) {
+                    $user->forceDelete();
+                } else {
+                    $user->forceDelete();
+                }
+                return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+            } else {
+                return Response::json(['mensaje' => 'Se ha producido un error.', 'data' => 'Error', 'status' => '200'], 200);
+            }
+        }else{
+            return Response::json(['mensaje' => 'Este usuario no se puede eliminar', 'data' => 'Error', 'status' => '200'], 200);
+        }
 
     }
 
 
 
-//    protected function viewSearchModal(){
-//
-//        $user = Auth::user();
-//        $roles = Role::query()->where('id','>',3)->orderBy('name') ->pluck('name','id')->toArray();
-//
-//        return view('layouts.Accesorios._searchModal',[
-//            "User"        => $user,
-//            "Roles"       => $roles,
-//            "TituloModal" => "Buscar dato ",
-//            "RouteModal"   => 'listaUsuarios',
-//        ]);
-//
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
+
+// ***************** MUESTRA LA EDICIÓMN DE FOTO ++++++++++++++++++++ //
+    protected function showEditProfilePhoto()
+    {
+        $user = Auth::user();
+        $titulo_catalogo = "";
+        $this->msg = "";
+        return view('SIGSAS.User.user_photo_update', [
+                "user"            => $user,
+                "items"           => $user,
+                "titulo_catalogo" => "Catálogo de Usuarios",
+                'titulo_header'   => 'Actualizando avatar',
+                'msg'             => $this->msg,
+            ]
+        );
+    }
+
+
+// ***************** MUESTRA LA EDICIÓN DEL PASSWORD ++++++++++++++++++++ //
+    protected function showEditProfilePassword()
+    {
+        $user = Auth::user();
+        $titulo_catalogo = "";
+        $this->msg = "";
+        session(['msg' => $this->msg]);
+        return view('SIGSAS.User.user_password_edit', [
+                "user"            => $user,
+                "items"           => $user,
+                "titulo_catalogo" =>"Catálogo de Usuarios",
+                'titulo_header'   => 'Actualizando password',
+                'msg'             => $this->msg,
+            ]
+        );
+    }
+
+// ***************** CAMBIA EL PASSWORD ++++++++++++++++++++ //
+    protected function changePasswordUser(UserUpdatePasswordRequest $request)
+    {
+        $request->updateUserPassword();
+        $titulo_catalogo = "";
+        $this->msg = "";
+        session(['msg' => $this->msg]);
+        return view('SIGSAS.User.user_password_edit', [
+            "user"            => Auth::user(),
+            "items"           => Auth::user(),
+            "msg"             => 'Password cambiado con éxito!',
+            "titulo_catalogo" =>"Catálogo de Usuarios",
+            'titulo_header'   => 'Editando password',
+            'msg'             => $this->msg,
+        ]);
+    }
+
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function searchUser(Request $request)
+    {
+        ini_set('max_execution_time', 300);
+        $filters =$request->input('search');
+        $F           = new GeneralFunctions();
+        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        $items = User::query()
+            ->search($tsString)
+            ->orderBy('id')->take(50)
+            ->get();
+        $data=array();
+        //dd($items);
+        foreach ($items as $item) {
+            $data[]=array(
+                'value'=>$item->fullName.' - '.$item->curp,
+                'domicilio'=>$item->ubicaciones()->first()->Ubicacion,
+                'telefonos'=>$item->TelefonosCelularesEmails,
+                'id'=>$item->id,
+            );
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No se encontraron resultados','id'=>0];
+
+    }
+
+// ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //
+    protected function getUser($Id=0)
+    {
+        $items = User::find($Id);
+        $items->domicilio = $items->ubicaciones()->first()->Ubicacion;
+        $items->ubicacion_id = $items->ubicaciones()->first()->id;
+        $items->nombre_completo = $items->FullName;
+        $items->telefonos = $items->TelefonosCelularesEmails;
+        //dd($items);
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($items), 'status' => '200'], 200);
+
+    }
+
+    protected function getCURP(Request $request)
+    {
+        ini_set('max_execution_time', 300);
+        $filters =$request->input('search');
+        //dd($filters);
+        $F           = new GeneralFunctions();
+        $tsString    = $F->string_to_tsQuery( strtoupper($filters),' & ');
+        $data =  User::query()
+            ->search($tsString)
+            ->orderBy('id')->take(50)
+            ->get();
+
+        return Response::json(['mensaje' => 'OK', 'data' => json_decode($data), 'status' => '200'], 200);
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 //
 //
 //// ***************** EDITA LOS DATOS DEL USUARIO PARA ESCRITURA ++++++++++++++++++++ //
@@ -294,17 +454,6 @@ class UserController extends Controller{
 //    }
 //
 //
-//    // ***************** ELIMINA AL USUARIO VIA AJAX ++++++++++++++++++++ //
-//    protected function removeItem($Id = 0, $dato1 = null, $dato2 = null){
-//        $code = 'OK';
-//        $msg = "Registro Eliminado con éxito!";
-//        //dd($Id);
-//        $user = User::withTrashed()->findOrFail($Id);
-//        $user->forceDelete();
-//
-//        return Response::json(['mensaje' => $msg, 'data' => $code, 'status' => '200'], 200);
-//
-//    }
 //
 //
 //    protected function addRoleItem($User){
@@ -345,5 +494,9 @@ class UserController extends Controller{
 //        }
 //        return Response::json(['mensaje' => $msg, 'data' => $code, 'status' => '200'], 200);
 //    }
+//
+//
+
+
 
 }

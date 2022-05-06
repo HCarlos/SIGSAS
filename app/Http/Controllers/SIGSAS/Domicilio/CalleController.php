@@ -31,7 +31,7 @@ class CalleController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('catalogos.catalogo.domicilio.calle.calle_list',
+        return view('SIGSAS.Domicilio.calle.calle_list',
             [
                 'items' => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -52,7 +52,7 @@ class CalleController extends Controller
 
     protected function newItem()
     {
-        return view('catalogos.catalogo.domicilio.calle.calle_new',
+        return view('SIGSAS.Domicilio.calle.calle_new',
             [
                 'editItemTitle' => 'Nuevo',
                 'postNew' => 'createCalle',
@@ -65,18 +65,20 @@ class CalleController extends Controller
     protected function newItemV2()
     {
         $user = Auth::user();
-        return view('SIAC._comun.__modal_comun_1',
+        return view('SIGSAS._comun.__modal_comun_1',
             [
                 'Titulo'      => 'Nuevo',
                 'Route'       => 'createCalleV2',
                 'Method'      => 'POST',
-                'items_forms' => 'SIAC.domicilio.calle.__calle.__calle_new',
+                'items_forms' => 'SIGSAS.Domicilio.calle.__calle.__calle_new',
                 'IsNew'       => true,
                 'user'        => $user,
 
             ]
         );
     }
+
+
 
     // ***************** CREAR NUEVO ++++++++++++++++++++ //
     protected function createItem(CalleRequest $request)
@@ -109,7 +111,7 @@ class CalleController extends Controller
     protected function editItem($Id)
     {
         $item = Calle::find($Id);
-        return view('catalogos.catalogo.domicilio.calle.calle_edit',
+        return view('SIGSAS.Domicilio.calle.calle_edit',
             [
                 'user' => Auth::user(),
                 'items' => $item,
@@ -124,13 +126,13 @@ class CalleController extends Controller
     protected function editItemV2($Id){
         $item = Calle::find($Id);
         $user = Auth::user();
-        return view('SIAC._comun.__modal_comun_1',
+        return view('SIGSAS._comun.__modal_comun_1',
             [
                 'Titulo'      => 'Nuevo',
                 'Route'       => 'updateCalleV2',
                 'Method'      => 'POST',
                 'items'       => $item,
-                'items_forms' => 'SIAC.domicilio.calle.__calle.__calle_edit',
+                'items_forms' => 'SIGSAS.Domicilio.calle.__calle.__calle_edit',
                 'IsNew'       => false,
                 'IsModal'     => true,
                 'user'        => $user,

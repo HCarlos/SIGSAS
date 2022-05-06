@@ -81,8 +81,8 @@
                 <div class="input-group">
                     {!! Form::text('search_autocomplete',null, array('placeholder' => 'Buscar ubicación...','class' => 'form-control search_autocomplete','id'=>'search_autocomplete')) !!}
                     <span class="input-group-append">
-{{--                        <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>--}}
-                        <a href="#" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                        <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="fa fa-plus"></i></a>
+{{--                        <a href="#" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>--}}
                     </span>
                 </div>
                 <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion') }}" class="form-control" disabled/>

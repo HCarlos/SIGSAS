@@ -11,7 +11,8 @@
         <div class="col-md-8">
             <!-- Chart-->
             @component('components.card')
-                @slot('title_card',$user->FullName)
+                @slot('titulo_catalogo',$titulo_catalogo ?? '')
+                @slot('title_card', $titulo_header ?? '')
                 @slot('body_card')
                     @include('SIGSAS.xFiles.Codes.__errors')
                     <form method="POST" action="{{ route('updateUser') }}">

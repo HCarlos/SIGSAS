@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SIGSAS\Dependencia;
 
+use App\Classes\GeneralFunctions;
 use App\Classes\RemoveItemSafe;
 use App\Http\Requests\SIGSAS\Dependencia\DependenciaRequest;
 use App\Models\SIGSAS\Estructura\Dependencia;
@@ -16,8 +17,18 @@ class DependenciaController extends Controller
 {
 
     protected $tableName = "dependencias";
+    protected $F = null;
+
+
+
 
 // ***************** MUESTRA EL LISTADO DE USUARIOS ++++++++++++++++++++ //
+    public function __construct()
+    {
+        $this->tableName = "dependencias";
+        $this->F = new GeneralFunctions();
+    }
+
     protected function index(Request $request)
     {
         ini_set('max_execution_time', 300);
@@ -32,7 +43,7 @@ class DependenciaController extends Controller
 
 //        dd($items);
 
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_list',
+        return view('SIGSAS.Dependencias.dependencia.dependencia_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -56,20 +67,20 @@ class DependenciaController extends Controller
         $Jefes = User::all()->sortBy(function($item) {
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_new',
+        return view('SIGSAS.Dependencias.dependencia.dependencia_new',
             [
-                'editItemTitle' => 'Nuevo',
-                'jefes' => $Jefes,
-                'postNew' => 'createDependencia',
+                'editItemTitle'   => 'Nuevo',
+                'jefes'           => $Jefes,
+                'postNew'         => 'createDependencia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => 'Nuevo registro',
             ]
         );
     }
 
-    protected function createItem(Request $request)
+    protected function createItem(DependenciaRequest $request)
     {
-        dd( $request->all() );
+//        dd( $request->all() );
 
         $item = $request->manage();
         if (!isset($item)) {
@@ -86,12 +97,12 @@ class DependenciaController extends Controller
                 })->orderByRaw("concat(ap_paterno,' ',ap_materno,' ',nombre) DESC")
                 ->get();
         $user = Auth::user();
-        return view('SIAC.dependencia.dependencia.dependencia_modal',
+        return view('SIGSAS.Dependencias.dependencia.dependencia_modal',
         [
             'Titulo'          => 'Nueva',
             'Route'           => 'createDependenciaV2',
             'Method'          => 'POST',
-            'items_forms'     => 'SIAC.dependencia.dependencia.__dependencia.__dependencia_new',
+            'items_forms'     => 'SIGSAS.Dependencias.dependencia.__dependencia.__dependencia_new',
             'IsNew'           => true,
             'user'            => $user,
             'jefes'           => $Jefes,
@@ -124,13 +135,13 @@ class DependenciaController extends Controller
             return $item->ap_paterno.' '.$item->ap_materno.' '.$item->nombre;
         });
 
-        return view('catalogos.catalogo.dependencias.dependencia.dependencia_edit',
+        return view('SIGSAS.Dependencias.dependencia.dependencia_edit',
             [
-                'user' => Auth::user(),
-                'jefes' => $Jefes,
-                'items' => $item,
-                'editItemTitle' => isset($item->dependencia) ? $item->dependencia : 'Nuevo',
-                'putEdit' => 'updateDependencia',
+                'user'            => Auth::user(),
+                'jefes'           => $Jefes,
+                'items'           => $item,
+                'editItemTitle'   => $item->dependencia ?? 'Nuevo',
+                'putEdit'         => 'updateDependencia',
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
                 'titulo_header'   => 'Editando el Folio '.$Id,
             ]
@@ -157,12 +168,12 @@ class DependenciaController extends Controller
                 ->get();
         $user = Auth::user();
 
-        return view('SIAC.dependencia.dependencia.dependencia_modal',
+        return view('SIGSAS.Dependencias.dependencia.dependencia_modal',
             [
                 'Titulo'          => isset($item->dependencia) ? $item->dependencia : 'Nueva',
                 'Route'           => 'updateDependenciaV2',
                 'Method'          => 'POST',
-                'items_forms'     => 'SIAC.dependencia.dependencia.__dependencia.__dependencia_edit',
+                'items_forms'     => 'SIGSAS.Dependencias.dependencia.__dependencia.__dependencia_edit',
                 'IsNew'           => false,
                 'IsModal'         => true,
                 'items'           => $item,
@@ -174,17 +185,7 @@ class DependenciaController extends Controller
     }
 
     protected function updateItemV2(DependenciaRequest $request){
-        $Obj = $request->manage();
-        if (!is_object($Obj)) {
-            $id = $request->all(['id']);
-            $redirect = 'editComunidadV2/' . $id;
-            return redirect($redirect)
-                ->withErrors($Obj)
-                ->withInput();
-        }else{
-            $id = $Obj->id;
-        }
-        return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+        return $this->F->setSaveItem($request);
     }
 
 
@@ -193,12 +194,6 @@ class DependenciaController extends Controller
     {
         $item = Dependencia::withTrashed()->findOrFail($id);
         if (isset($item)) {
-//            if (!$item->trashed()) {
-//                $item->forceDelete();
-//            } else {
-//                $item->forceDelete();
-//            }
-//            return Response::json(['mensaje' => 'Registro eliminado con éxito', 'data' => 'OK', 'status' => '200'], 200);
             return RemoveItemSafe::RemoveItemObject($item,'dependencia_id',$id);
 
         } else {

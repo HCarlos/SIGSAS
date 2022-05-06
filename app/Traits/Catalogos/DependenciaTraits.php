@@ -9,7 +9,7 @@
 namespace App\Traits\Catalogos;
 
 
-use App\Models\Catalogos\Estatu;
+use App\Models\SIGSAS\Estructura\Estatu;
 
 trait DependenciaTraits
 {

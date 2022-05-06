@@ -31,7 +31,7 @@ class ColoniaController extends Controller
         $items->appends($filters)->fragment('table');
         $user = Auth::User();
 
-        return view('SIAC.domicilio.colonia.colonia_list',
+        return view('SIGSAS.Domicilio.colonia.colonia_list',
             [
                 'items'           => $items,
                 'titulo_catalogo' => "Catálogo de " . ucwords($this->tableName),
@@ -55,7 +55,7 @@ class ColoniaController extends Controller
         $Codigospostales =Codigopostal::all(['id','cp'])->sortBy('cp');
         $Comunidades = Comunidad::all(['id','comunidad'])->sortBy('comunidad');
 
-        return view('SIAC.domicilio.colonia.colonia_edit',
+        return view('SIGSAS.Domicilio.colonia.colonia_edit',
             [
                 'user'            => Auth::user(),
                 'codigospostales' => $Codigospostales,
@@ -84,7 +84,7 @@ class ColoniaController extends Controller
         $Codigospostales =Codigopostal::all(['id','cp'])->sortBy('cp');
         $Comunidades = Comunidad::all(['id','comunidad'])->sortBy('comunidad');
         //dd($Codigospostales);
-        return view('SIAC.domicilio.colonia.colonia_new',
+        return view('SIGSAS.Domicilio.colonia.colonia_new',
             [
                 'editItemTitle'   => 'Nuevo',
                 'codigospostales' => $Codigospostales,
