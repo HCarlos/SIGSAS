@@ -1,10 +1,8 @@
 
 <div class="form-group row mb-1">
-    <label for = "search_autocomplete_calle" class="col-md-3 col-form-label">Calle</label>
+    <label for = "calle_id" class="col-md-3 col-form-label">Calle</label>
     <div class="col-md-9">
-        <div class="input-group">
-            {!! Form::text('search_autocomplete_calle', $items->calle, array('placeholder' => 'Buscar calle...','class' => 'form-control','id'=>'search_autocomplete_calle')) !!}
-        </div>
+        {{ Form::select('calle_id', $calles, $items->calle_id, ['id' => 'calle_id','class'=>'calle_id form-control select2','data-toggle'=>'select2','size'=>1 ]) }}
     </div>
     <label for = "num_ext" class="col-md-3 col-form-label">Núm. Exterior</label>
     <div class="col-md-9">
@@ -16,19 +14,27 @@
     </div>
 </div>
 <div class="form-group row mb-1">
-    <label for = "search_autocomplete_colonia" class="col-md-3 col-form-label">Colonia</label>
+    <label for = "colonia_id" class="col-md-3 col-form-label">Colonia</label>
     <div class="col-md-7">
-        <div class="input-group">
-            {!! Form::text('search_autocomplete_colonia', $items->colonia, array('placeholder' => 'Buscar colonia...','class' => 'form-control','id'=>'search_autocomplete_colonia')) !!}
-        </div>
+        {{--<select class="colonia_id form-control "  name="colonia_id" id="colonia_id" size="1">--}}
+            {{--@foreach($colonias as $t)--}}
+                {{--<option value="{{$t->id}}" @if($t->id == intval($items->colonia_id)) selected @endif>{{ $t->colonia }}</option>--}}
+            {{--@endforeach--}}
+        {{--</select>--}}
+        {{ Form::select('colonia_id', $colonias, $items->colonia_id, ['id' => 'colonia_id','class'=>'colonia_id form-control select2','data-toggle'=>'select2','size'=>1 ]) }}
     </div>
     <div class="col-md-2">
-        <a href="{{route("newColonia")}}" target="_blank" class="btn btn-icon btn-info " > <i class="fa fa-plus"></i></a>
+        <a href="{{route("newColonia")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>
     </div>
 </div>
 <div class="form-group row mb-1">
     <label for = "comunidad_id" class="col-md-3 col-form-label">Comunidad</label>
     <div class="col-md-7">
+        {{--<select class="comunidad_id form-control "   name="comunidad_id" id="comunidad_id" size="1" >--}}
+            {{--@foreach($comunidades as $t)--}}
+                {{--<option value="{{$t->id}}" @if(intval($items->comunidad_id) == intval($t->id)) selected @endif>{{ $t->id.' '.$items->comunidad_id.' '.$t->comunidad }}</option>--}}
+            {{--@endforeach--}}
+        {{--</select>--}}
         {{ Form::select('comunidad_id', $comunidades, $items->comunidad_id, ['id' => 'comunidad_id','class'=>'comunidad_id form-control ','disabled'=>'disabled','size'=>1 ]) }}
     </div>
 
@@ -46,6 +52,11 @@
     </div>
     <label for = "codigopostal_id" class="col-md-3 col-form-label">CP</label>
     <div class="col-md-7">
+        {{--<select class="codigopostal_id form-control " name="codigopostal_id" id="codigopostal_id" size="1" disabled>--}}
+            {{--@foreach($codigospostales as $t)--}}
+                {{--<option value="{{$t->id}}" @if( intval($t->id) == intval($items->codigopostal_id) ) selected @endif>{{ $t->cp }}</option>--}}
+            {{--@endforeach--}}
+        {{--</select>--}}
         {{ Form::select('codigopostal_id', $codigospostales, $items->codigopostal_id, ['id' => 'codigopostal_id','class'=>'codigopostal_id form-control ','disabled'=>'disabled','size'=>1 ]) }}
     </div>
     <label for = "latitud" class="col-md-3 col-form-label">Latitud</label>
@@ -59,8 +70,6 @@
 </div>
 
 <input type="hidden" name="id" value="{{$items->id}}" >
-<input type="hidden" name="calle_id" id="calle_id" value="{{$items->calle_id}}" >
-<input type="hidden" name="colonia_id" id="colonia_id" value="{{$items->colonia_id}}" >
 <input type="hidden" name="cd_id" id="cd_id" value="0" >
 <input type="hidden" name="mun_id" id="mun_id" value="0" >
 <input type="hidden" name="edo_id" id="edo_id" value="0" >

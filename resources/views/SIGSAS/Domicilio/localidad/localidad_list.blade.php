@@ -1,14 +1,14 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.catalogo')
     @slot('buttons')
-        @include('shared.ui_kit.__menu_catalogo')
+        @include('SIGSAS.xFiles.UI_Kit.__menu_catalogo')
     @endslot
     @slot('body_catalogo')
         <div class="col-md-12">
-            @include('shared.catalogo.domicilio.localidad.__localidad_list')
+            @include('SIGSAS.Domicilio.localidad.__localidad.__localidad_list')
         </div>
     @endslot
 @endcomponent

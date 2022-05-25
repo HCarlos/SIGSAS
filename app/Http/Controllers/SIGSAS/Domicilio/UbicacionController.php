@@ -177,20 +177,15 @@ class UbicacionController extends Controller
             ->orderBy('id')
             ->get();
 
-//        dd($items);
-
         $data=array();
 
         foreach ($items as $item) {
-//            $data[]=array('value'=>$item->id.' '.$item->calle.' '.$item->colonia.' '.$item->comunidad,' '.$item->ciudad,'id'=>$item->id);
             $data[]=array('value'=>$item->calle.' '.$item->num_ext.' '.$item->num_int.' '.$item->colonia.' '.$item->comunidad,' '.$item->ciudad,'id'=>$item->id);
         }
         if(count($data))
             return $data;
         else
             return ['value'=>'No se encontraron resultados','id'=>0];
-//        return Response::json(['mensaje' => 'OK', 'data' => json_decode($data), 'status' => '200'], 200);
-
     }
 
 // ***************** MAUTOCOMPLETE DE UBICACIONES ++++++++++++++++++++ //

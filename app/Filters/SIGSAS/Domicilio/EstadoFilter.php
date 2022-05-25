@@ -8,7 +8,6 @@
 
 namespace App\Filters\SIGSAS\Domicilio;
 
-
 use App\Filters\Common\QueryFilter;
 
 class EstadoFilter extends QueryFilter

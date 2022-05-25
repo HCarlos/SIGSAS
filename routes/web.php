@@ -1,13 +1,23 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SIGSAS\Denuncia\DashboardController;
+use App\Http\Controllers\SIGSAS\Denuncia\DenunciaCiudadanaController;
+use App\Http\Controllers\SIGSAS\Denuncia\DenunciaController;
+use App\Http\Controllers\SIGSAS\Denuncia\DenunciaDependenciaServicioController;
+use App\Http\Controllers\SIGSAS\Denuncia\Imagene\ImageneController;
+use App\Http\Controllers\SIGSAS\Denuncia\Respuesta\RespuestaCiudadanaController;
+use App\Http\Controllers\SIGSAS\Denuncia\Respuesta\RespuestaController;
 use App\Http\Controllers\SIGSAS\Domicilio\CalleController;
 use App\Http\Controllers\SIGSAS\Domicilio\CodigopostalController;
 use App\Http\Controllers\SIGSAS\Domicilio\ColoniaController;
 use App\Http\Controllers\SIGSAS\Domicilio\ComunidadController;
 use App\Http\Controllers\SIGSAS\Domicilio\UbicacionController;
+use App\Http\Controllers\SIGSAS\External\HojaDenunciaArchivoController;
+use App\Http\Controllers\SIGSAS\External\ListDenunciaXLSXController;
+use App\Http\Controllers\SIGSAS\External\HojaDenunciaController;
+use App\Http\Controllers\SIGSAS\Storage\StorageProfileController;
 use App\Http\Controllers\SIGSAS\User\UserController;
-use App\Http\Controllers\Storage\StorageProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -145,7 +155,79 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
 
 
 
-/* ********************************************************************************************************************** */
+
+    // Catálogo de Denuncias
+
+    Route::get('listDenuncias/',[DenunciaController::class,'index'])->name('listDenuncias');
+    Route::get('editDenuncia/{Id}',[DenunciaController::class,'editItem'])->name('editDenuncia');
+    Route::put('updateDenuncia',[DenunciaController::class,'updateItem'])->name('updateDenuncia');
+    Route::get('newDenuncia',[DenunciaController::class,'newItem'])->name('newDenuncia');
+    Route::post('createDenuncia',[DenunciaController::class,'createItem'])->name('createDenuncia');
+    Route::get('removeDenuncia/{id}',[DenunciaController::class,'removeItem'])->name('removeDenuncia');
+    Route::get('searchAdress/',[UbicacionController::class,'searchAdress'])->name('searchAdress');
+    Route::get('getUbi/{IdUbi}',[UbicacionController::class,'getUbi'])->name('getUbi');
+    Route::get('showModalSearchDenuncia/',[DenunciaController::class,'showModalSearchDenuncia'])->name('showModalSearchDenuncia');
+    Route::match(['get','put','post'],'findDataInDenuncia/',[DenunciaController::class,'findDataInDenuncia'])->name('findDataInDenuncia');
+    Route::post('showDataListDenunciaExcel1A/', [ListDenunciaXLSXController::class,'getListDenunciaXLSX'])->name('showDataListDenunciaExcel1A');
+    Route::post('showDataListDenunciaRespuestaExcel1A/', [ListDenunciaXLSXController::class,'showDataListDenunciaRespuestaExcel1A'])->name('showDataListDenunciaRespuestaExcel1A');
+    Route::get('cerrarDenuncia/{id}',[DenunciaController::class,'closeItem'])->name('cerrarDenuncia');
+    Route::get('firmarDenuncia/{id}',[DenunciaController::class,'signItem'])->name('firmarDenuncia');
+
+
+    // PIVOTE DENUNCIA DEPENDENCIA SERVICIO
+    Route::get('listDenunciaDependenciaServicio/{Id}', [DenunciaDependenciaServicioController::class,'index'])->name('listDenunciaDependenciaServicio');
+    Route::get('addDenunciaDependenciaServicio/{Id}', [DenunciaDependenciaServicioController::class,'addItem'])->name('addDenunciaDependenciaServicio');
+    Route::post('postAddDenunciaDependenciaServicio', [DenunciaDependenciaServicioController::class,'postNew'])->name('postAddDenunciaDependenciaServicio');
+    Route::get('editDenunciaDependenciaServicio/{Id}', [DenunciaDependenciaServicioController::class,'editItem'])->name('editDenunciaDependenciaServicio');
+    Route::post('putAddDenunciaDependenciaServicio', [DenunciaDependenciaServicioController::class,'putEdit'])->name('putAddDenunciaDependenciaServicio');
+    Route::get('removeDenunciaDependenciaServicio/{id}', [DenunciaDependenciaServicioController::class,'removeItem'])->name('removeDenunciaDependenciaServicio');
+
+    // Catálogo de DENUNCIAS CIUDADANAS
+    Route::get('listDenunciasCiudadanas/', [DenunciaCiudadanaController::class,'index'])->name('listDenunciasCiudadanas');
+    Route::get('editDenunciaCiudadana/{Id}', [DenunciaCiudadanaController::class,'editItem'])->name('editDenunciaCiudadana');
+    Route::put('updateDenunciaCiudadana', [DenunciaCiudadanaController::class,'updateItem'])->name('updateDenunciaCiudadana');
+    Route::get('newDenunciaCiudadana', [DenunciaCiudadanaController::class,'newItem'])->name('newDenunciaCiudadana');
+    Route::post('createDenunciaCiudadana', [DenunciaCiudadanaController::class,'createItem'])->name('createDenunciaCiudadana');
+    Route::get('removeDenunciaCiudadana/{id}', [DenunciaCiudadanaController::class,'removeItem'])->name('removeDenunciaCiudadana');
+    Route::get('searchAdressCiudadana/', [DenunciaCiudadanaController::class,'searchAdress'])->name('searchAdressCiudadana');
+    Route::get('getUbiCiudadana/{IdUbi}', [DenunciaCiudadanaController::class,'getUbi'])->name('getUbiCiudadana');
+    Route::get('/imprimir_denuncia/{Id}', [HojaDenunciaController::class,'imprimirDenuncia'])->name('imprimirDenuncia/');
+
+    // Catálogo de Respuestas
+    Route::get('listRespuestas/{Id}', [RespuestaController::class,'index'])->name('listRespuestas');
+    Route::get('removeRespuesta/{id}', [RespuestaController::class,'removeItem'])->name('removeRespuesta');
+    Route::get('/showModalRespuestaNew/{denuncia_id}', [RespuestaController::class,'showModalRespuestaNew'])->name('/showModalRespuestaNew');
+    Route::get('showModalRespuestaEdit/{Id}', [RespuestaController::class,'showModalRespuestaEdit'])->name('/showModalRespuestaEdit');
+    Route::post('saveRespuestaDen/', [RespuestaController::class,'saveRespuestaDen'])->name('saveRespuestaDen');
+    Route::put('saveRespuestaDen/', [RespuestaController::class,'saveRespuestaDen'])->name('saveRespuestaDen');
+
+    Route::get('/RespuestaARespuestaNew/{denuncia_id}/{respuesta_id}', [RespuestaController::class,'RespuestaARespuestaNew'])->name('/RespuestaARespuestaNew');
+    Route::post('saveRespuestaARespuestaDen/', [RespuestaController::class,'saveRespuestaARespuestaDen'])->name('saveRespuestaARespuestaDen');
+
+    Route::get('listRespuestasCiudadanas/{Id}', [RespuestaCiudadanaController::class,'index'])->name('listRespuestasCiudadanas');
+    Route::get('removeRespuestaCiudadana/{id}', [RespuestaCiudadanaController::class,'removeItem'])->name('removeRespuestaCiudadana');
+    Route::get('/showModalRespuestaCiudadanaNew/{denuncia_id}', [RespuestaCiudadanaController::class,'showModalRespuestaCiudadanaNew'])->name('/showModalRespuestaCiudadanaNew');
+    Route::get('showModalRespuestaCiudadanaEdit/{Id}', [RespuestaCiudadanaController::class,'showModalRespuestaCiudadanaEdit'])->name('/showModalRespuestaCiudadanaEdit');
+
+
+    // Catálogo de Imagenes
+    Route::get('listImagenes/{Id}', [ImageneController::class,'index'])->name('listImagenes');
+    Route::get('removeImagene/{id}', [ImageneController::class,'removeItem'])->name('removeImagene');
+    Route::get('/showModalImageneNew/{denuncia_id}', [ImageneController::class,'showModalImageneNew'])->name('/showModalImageneNew');
+    Route::get('showModalImageneEdit/{Id}', [ImageneController::class,'showModalImageneEdit'])->name('/showModalImageneEdit');
+    Route::post('saveImageneDen/', [ImageneController::class,'saveImageneDen'])->name('saveImageneDen');
+    Route::put('saveImageneDen/', [ImageneController::class,'saveImageneDen'])->name('saveImageneDen');
+
+    Route::get('/ImagenAImagenNew/{denuncia_id}/{imagen_id}', [ImageneController::class,'ImagenAImagenNew'])->name('/ImagenAImagenNew');
+    Route::post('saveImagenAImagenDen/', [ImageneController::class,'saveImagenAImagenDen'])->name('saveImagenAImagenDen');
+    Route::get('removeImagenParent/{id}', [ImageneController::class,'removeImagenParent'])->name('removeImagenParent');
+
+
+
+
+
+
+    /* ********************************************************************************************************************** */
 
 
 
@@ -164,6 +246,15 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::post('getModelListXlS/{model}','External\ListModelXLSXController@getListModelXLSX')->name('getModelListXlS');
 
 
+});
+
+Route::get('/imprimir_denuncia/{uuid}', [HojaDenunciaController::class,'imprimirDenuncia'])->name('imprimir_denuncia/');
+Route::get('/imprimir_denuncia_archivo/{uuid}', [HojaDenunciaArchivoController::class,'imprimirDenuncia'])->name('imprimir_denuncia_archivo/');
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::match(['get','put','post'],'dashboard', [DashboardController::class,'index'])->name('dashboard');
 });
 
 

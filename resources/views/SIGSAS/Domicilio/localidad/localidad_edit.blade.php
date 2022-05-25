@@ -1,6 +1,6 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.home')
     @slot('titulo_catalogo',$titulo_catalogo)
@@ -11,12 +11,12 @@
             @component('components.card')
                 @slot('title_card','')
                 @slot('body_card')
-                    @include('shared.code.__errors')
+                    @include('SIGSAS.xFiles.Codes.__errors')
                     <form method="POST" action="{{ route('updateLocalidad') }}">
                         @csrf
                         {{method_field('PUT')}}
-                        @include('shared.catalogo.domicilio.localidad.__localidad_edit')
-                        @include('shared.ui_kit.__button_form_normal')
+                        @include('SIGSAS.Domicilio.localidad.__localidad.__localidad_edit')
+                        @include('SIGSAS.xFiles.UI_Kit.__button_form_normal')
                     </form>
                 @endslot
             @endcomponent

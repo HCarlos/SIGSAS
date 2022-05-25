@@ -1,6 +1,6 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.home')
     @slot('titulo_catalogo',$titulo_catalogo)
@@ -10,11 +10,11 @@
             @component('components.card')
                 @slot('title_card','')
                 @slot('body_card')
-                    @include('shared.code.__errors')
+                    @include('SIGSAS.xFiles.Codes.__errors')
                     <form method="POST" action="{{ route('createCiudad') }}">
                         @csrf
-                        @include('shared.catalogo.domicilio.ciudad.__ciudad_new')
-                        @include('shared.ui_kit.__button_form_normal')
+                        @include('SIGSAS.Domicilio.ciudad.__ciudad.__ciudad_new')
+                        @include('SIGSAS.xFiles.UI_Kit.__button_form_normal')
                     </form>
                 @endslot
             @endcomponent

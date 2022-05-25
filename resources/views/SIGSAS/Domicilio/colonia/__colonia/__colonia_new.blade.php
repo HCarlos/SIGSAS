@@ -34,25 +34,36 @@
 <div class="form-group row mb-3">
     <label for = "search_autocomplete_cp" class="col-md-3 col-form-label">CP</label>
     <div class="col-md-7">
+        {{--        <select class="codigopostal_id form-control select2" data-toggle="select2"  name="codigopostal_id" id="codigopostal_id" size="1">--}}
+        {{--            @foreach($codigospostales as $t)--}}
+        {{--                <option value="{{$t->id}}" {{ old('codigopostal_id') == $t->id ? ' selected ':''}} >{{ $t->cp }}</option>--}}
+        {{--            @endforeach--}}
+        {{--        </select>--}}
         <div class="input-group">
             {!! Form::text('search_autocomplete_cp', null, array('placeholder' => 'Buscar código postal...','class' => 'form-control search_autocomplete_cp','id'=>'search_autocomplete_cp')) !!}
         </div>
 
     </div>
     <div class="col-md-2">
-        <a href="{{route("newCodigopostalV2")}}" id="{{route("newCodigopostalV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="fa fa-plus"></i></a>
+        <a href="{{route("newCodigopostalV2")}}" id="{{route("newCodigopostalV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="mdi mdi-plus"></i></a>
     </div>
 </div>
 
 <div class="form-group row mb-3">
     <label for = "search_autocomplete_comunidad" class="col-md-3 col-form-label">Comunidad</label>
     <div class="col-md-7">
+        {{--        <select class="comunidad_id form-control select2" data-toggle="select2"  name="comunidad_id" id="comunidad_id" size="1">--}}
+        {{--            @foreach($comunidades as $t)--}}
+        {{--                <option value="{{$t->id}}" {{ old('comunidad_id') == $t->id ? ' selected ':''}} >{{ $t->comunidad }}</option>--}}
+        {{--            @endforeach--}}
+        {{--        </select>--}}
         <div class="input-group">
             {!! Form::text('search_autocomplete_comunidad', null, array('placeholder' => 'Buscar comunidad...','class' => 'form-control search_autocomplete_comunidad','id'=>'search_autocomplete_comunidad')) !!}
         </div>
     </div>
     <div class="col-md-2">
-        <a href="{{route("newComunidadV2")}}" id="{{route("newComunidadV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="fa fa-plus"></i></a>
+{{--        <a href="{{route("newComunidad")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>--}}
+        <a href="{{route("newComunidadV2")}}" id="{{route("newComunidadV2")}}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull"> <i class="mdi mdi-plus"></i></a>
     </div>
 </div>
 

@@ -11,10 +11,7 @@ namespace App\Filters\SIGSAS\Domicilio;
 
 use App\Filters\Common\QueryFilter;
 
-class CodigopostalFilter extends QueryFilter
-{
-
-
+class CodigopostalFilter extends QueryFilter{
     public function rules(): array{
         return [
             'search' => '',
@@ -30,7 +27,5 @@ class CodigopostalFilter extends QueryFilter
                 ->orWhere('id', 'like', "%{$search}%");
         });
     }
-
-
 
 }

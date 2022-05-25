@@ -35,14 +35,13 @@ trait ImageneTrait
         $dg   = $fl[count($fl)-1];
         $flDoc = config("atemun.document_type_extension");
         $flImg = config("atemun.images_type_extension");
-//        $rt   = in_array( $dg, $envi ) ? '/images/web/document-file.png': '/images/web/file-not-found.png';
         if ( in_array( $dg, $flDoc ) ) {
             $rt = '/images/web/document-file.png';
         }elseif (in_array( $dg, $flImg ) ) {
-//            $rt =  "/storage/".$this->disk."/".$this->image_thumb;
-            $exists = Storage::disk($this->disk)->exists($this->image_thumb);
+            $exists = Storage::disk($this->disk)->exists($this->image);
+            //dd($exists);
             $rt = $exists
-                ? "/storage/".$this->disk."/".$this->image_thumb
+                ? "/storage/" . $this->disk."/".$this->image
                 : '/images/web/file-not-found.png';
         }else{
             $rt = '/images/web/file-not-found.png';

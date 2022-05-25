@@ -1,7 +1,7 @@
 <div class="row bg-dark-lighten rounded ">
     @if( $items->total() > 15 )
         <div class="col-md-6 mb-0" >
-            @include('shared.ui_kit.__toolbar_respuesta')
+            @include('SIGSAS.xFiles.UI_Kit.__toolbar_respuesta')
         </div>
         <div class="col-md-6 ">
             <div class="mt-md-2">
@@ -10,7 +10,7 @@
         </div>
     @else
         <div class="col-md-12 mb-0" >
-            @include('shared.ui_kit.__toolbar_respuesta')
+            @include('SIGSAS.xFiles.UI_Kit.__toolbar_respuesta')
         </div>
     @endif
 </div>

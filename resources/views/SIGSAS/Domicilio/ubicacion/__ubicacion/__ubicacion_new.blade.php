@@ -1,21 +1,32 @@
 
 <div class="form-group row mb-1">
-    <label for = "calle_id" class="col-md-3 col-form-label">Calle</label>
+    <label for = "search_autocomplete_calle" class="col-md-3 col-form-label">Calle---</label>
     <div class="col-md-7">
+{{--        <select class="calle_id form-control select2" data-toggle="select2"  name="calle_id" id="calle_id" size="1">--}}
+{{--            @foreach($calles as $t)--}}
+{{--                <option value="{{$t->id}}" {{ old('calle_id') == $t->id ? ' selected ':''}}>{{ $t->calle }}</option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
         <div class="input-group">
             {!! Form::text('search_autocomplete_calle', null, array('placeholder' => 'Buscar calle...','class' => 'form-control','id'=>'search_autocomplete_calle')) !!}
         </div>
+
     </div>
     <div class="col-md-2">
-        <a href="{{ route("newCalleV2") }}" id="{{ route("newCalleV2") }}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull" title="Agregar Calle" >
-            <i class="fa fa-plus"></i>
-        </a>
+        <a href="{{route("newCalle")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>
+{{--        <a href="{{ route("newCalleV2") }}" id="{{ route("newCalleV2") }}" class="btn btn-icon btn-info btnFullModal" data-toggle="modal" data-target="#modalFull" title="Agregar Calle" >--}}
+{{--            <i class="mdi mdi-plus"></i>--}}
+{{--        </a>--}}
+
     </div>
 </div>
 <div class="form-group row mb-1">
-    <label for = "num_ext" class="col-md-3 col-form-label {{$errors->has('num_ext')?'text-danger':''}}">Núm. Exterior</label>
+    <label for = "num_ext" class="col-md-3 col-form-label has-num_ext">Núm. Exterior</label>
     <div class="col-md-7">
-        <input type="text" name="num_ext" id="num_ext" value="{{ old('num_ext') }}" class="form-control {{$errors->has('num_ext')?'has-error form-error':''}}" />
+        <input type="text" name="num_ext" id="num_ext" value="{{ old('num_ext') }}" class="form-control" />
+        <span class="has-num_ext">
+            <strong class="text-danger"></strong>
+        </span>
     </div>
 </div>
 <div class="form-group row mb-1">
@@ -25,22 +36,22 @@
     </div>
 </div>
 <div class="form-group row mb-1">
-    <label for = "search_autocomplete_colonia" class="col-md-3 col-form-label">Colonia</label>
+    <label for = "colonia_id" class="col-md-3 col-form-label">Colonia</label>
     <div class="col-md-7">
-        <div class="input-group">
-            {!! Form::text('search_autocomplete_colonia', null, array('placeholder' => 'Buscar colonia...','class' => 'form-control','id'=>'search_autocomplete_colonia')) !!}
-        </div>
+        <select class="colonia_id form-control select2" data-toggle="select2" name="colonia_id" id="colonia_id" size="1">
+            @foreach($colonias as $t)
+                <option value="{{$t->id}}" {{ old('colonia_id') == $t->id ? ' selected ':''}}>{{ $t->colonia }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="col-md-2">
-        <a href="{{route("newColonia")}}" target="_blank" class="btn btn-icon btn-info " > <i class="fa fa-plus"></i></a>
+        <a href="{{route("newColonia")}}" target="_blank" class="btn btn-icon btn-info " > <i class="mdi mdi-plus"></i></a>
     </div>
+
 </div>
-
-
 
 <input type="hidden" name="id" value="0" >
 <input type="hidden" name="comun_id" id="comun_id" value="0" >
 <input type="hidden" name="calle_id" id="calle_id" value="0" >
-<input type="hidden" name="colonia_id" id="colonia_id" value="0" >
 
 <hr>

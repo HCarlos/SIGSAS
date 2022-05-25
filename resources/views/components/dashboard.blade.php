@@ -1,17 +1,26 @@
-<div class="row mt-4">
-    {{$contenido}}
-</div>
+@extends('layouts.app')
 
-@include('shared.code.__submit_form')
+@section('content')
 
-@section("script_autocomplete")
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="{{asset('/js/servimun.autocomplete.js')}}?time()"></script>
+    <body>
+    <div class="wrapper">
+        @include('layouts.partials.left_sidebar')
+        <div class="content-page">
+            <div class="content">
+                @include('layouts.partials.navbar')
+                <div class="container-fluid home">
+                    @yield('container')
+                </div>
+                <!-- container -->
+            </div>
+        </div>
+        <!-- content -->
+{{--        @include('layouts.partials.footer_script')--}}
+    </div>
 
-    <script src="{{asset('/js/vendor/jquery-jvectormap-1.2.2.min.js')}}?time()"></script>
-    <script src="{{asset('/js/vendor/jquery-jvectormap-world-mill-en.js')}}?time()"></script>
-    <script src="{{asset('/js/pages/demo.dashboard.js')}}?time()"></script>
+{{--    @include('layouts.partials.full_modal')--}}
+{{--    @include('layouts.partials.footer_script')--}}
+
+    </body>
 
 @endsection
-

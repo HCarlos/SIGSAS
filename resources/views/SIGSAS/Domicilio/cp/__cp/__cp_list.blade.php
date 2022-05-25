@@ -18,8 +18,8 @@
                         <td>{{$item->cp}}</td>
                         <td class="table-action w-100">
                             <div class="button-list">
-                                @include('shared.ui_kit.__edit_item')
-                                @include('shared.ui_kit.__remove_item')
+                                @include('SIGSAS.xFiles.UI_Kit.__edit_item')
+                                @include('SIGSAS.xFiles.UI_Kit.__remove_item')
                             </div>
                         </td>
                     </tr>

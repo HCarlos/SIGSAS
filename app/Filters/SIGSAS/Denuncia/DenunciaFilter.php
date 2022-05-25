@@ -12,7 +12,6 @@ namespace App\Filters\SIGSAS\Denuncia;
 use App\Classes\GeneralFunctions;
 use App\Filters\Common\QueryFilter;
 use Carbon\Carbon;
-//use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class DenunciaFilter extends QueryFilter
@@ -49,57 +48,12 @@ class DenunciaFilter extends QueryFilter
         return $query->whereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
             ->orderByRaw("calle, num_ext, num_int, colonia, descripcion, referencia ASC");
 
-
-//        return $query->where(function ($query) use ($search, $tsString) {
-//                $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-//                    return $q->whereRaw("CONCAT( UPPER(TRIM(ap_paterno)),' ',UPPER(TRIM(ap_materno)),' ',UPPER(TRIM(nombre)) ) like ?", "%{$search}%")
-//                        ->orWhereRaw("UPPER(curp) like ?", "%{$search}%");
-//                })
-//                ->orWhereHas('estatus', function ($q) use ($search) {
-//                    return $q->whereRaw("UPPER(estatus) like ?", "%{$search}%")
-//                        ->where('ultimo',true);
-//                })
-//                ->orWhereRaw("searchtextdenuncia @@ to_tsquery('spanish', ?)", [$tsString])
-//                ->orWhere('id', intval($search));
-//        });
-
     }
-
-//->orWhereHas('dependencias', function ($q) use ($search) {
-//                    if ($this->IsEnlace()){
-//                        return $q->whereIn('dependencia_id',$this->getDependenciaId(),true);
-//                    }else{
-//    return $q->whereRaw("UPPER(dependencia) like ?", "%{$search}%");
-//}
-//})
-
-//->orWhere('cerrado', settype($search, 'boolean'))
-
-//->orWhereRaw("UPPER(descripcion) like ?", "%{$search}%")
-//->orWhereRaw("UPPER(referencia) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(calle) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(comunidad) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(ciudad) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(municipio) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(estado) like ?", "%{$search}%")
-
-
-//    public function searchToo($query, $search){
-//        if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
-//        $search = strtoupper($search);
-//
-//        $items = $query
-//            ->search($tsString);
-//
-//    }
-
 
     public function curp($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
         return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-//            dd($search);
             return $q->where("curp",strtoupper(trim($search)));
         });
     }
@@ -108,16 +62,10 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "") {return $query;}
         $search = strtoupper($search);
         return $query->orWhereHas('ciudadanos', function ($q) use ($search) {
-//            dd($q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%"));
-//            dd($search);
-
-//            return $q->whereRaw("CONCAT(ap_paterno,' ',ap_materno,' ',nombre) like ?", "%{$search}%");
-
             $filters  = $search;
             $F        = new GeneralFunctions();
             $tsString = $F->string_to_tsQuery( strtoupper($filters),' & ');
             $q->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$tsString]);
-
         });
     }
 
@@ -151,11 +99,9 @@ class DenunciaFilter extends QueryFilter
 
     public function servicio_id($query, $search){
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
-//        return $query->where('servicio_id', $search);
         return $query->whereHas('denuncia_servicios', function ($q) use ($query, $search) {
             return $q->where('servicio_id', intval($search));
         });
-
     }
 
     public function estatus_id($query, $search){
@@ -164,7 +110,6 @@ class DenunciaFilter extends QueryFilter
         return $query->whereHas('denuncia_estatus', function ($q) use ($query, $search) {
             return $q->where('estatu_id', intval($search));
         });
-
     }
 
     public function origen_id($query, $search){
@@ -188,7 +133,6 @@ class DenunciaFilter extends QueryFilter
         return $query->orWhereHas('dependencia', function ($q) use ($search) {
             return $q->whereIn('dependencia',$search);
         });
-
     }
 
     public function conrespuesta($query, $search){
@@ -202,8 +146,6 @@ class DenunciaFilter extends QueryFilter
         if (is_null($search) || empty ($search) || trim($search) == "0") {return $query;}
         return $query->orWhere('cerrado',settype($search, 'boolean'));
     }
-
-
 
     function IsEnlace(){
         return Session::get('IsEnlace');

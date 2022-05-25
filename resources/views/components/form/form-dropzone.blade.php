@@ -1,4 +1,4 @@
-@include('shared.code.__errors')
+@include('SIGSAS.xFiles.Codes.__errors')
 <form method="{{$metodo}}"
       action="{{ route($action) }}"
       class="dropzone dropzone-with-border"
@@ -20,5 +20,5 @@
         </button>
     </div>
 </form>
-@include('shared.code.__ajax_form_dropzone')
+@include('SIGSAS.xFiles.Codes.__ajax_form_dropzone')
 

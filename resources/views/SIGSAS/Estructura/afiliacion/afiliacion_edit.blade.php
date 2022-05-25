@@ -1,6 +1,6 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.home')
 
@@ -12,12 +12,12 @@
             @component('components.card')
                 @slot('title_card','')
                 @slot('body_card')
-                    @include('shared.code.__errors')
+                    @include('SIGSAS.xFiles.Codes.__errors')
                     <form method="POST" action="{{ route('updateAfiliacion') }}">
                         @csrf
                         {{method_field('PUT')}}
-                        @include('shared.catalogo.afiliacion.__afiliacion_edit')
-                        @include('shared.ui_kit.__button_form_normal')
+                        @include('SIGSAS.Estructura.afiliacion.__afiliacion.__afiliacion_edit')
+                        @include('SIGSAS.xFiles.UI_Kit.__button_form_normal')
                     </form>
                 @endslot
             @endcomponent

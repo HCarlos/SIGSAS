@@ -11,9 +11,7 @@ namespace App\Filters\SIGSAS\Domicilio;
 
 use App\Filters\Common\QueryFilter;
 
-class ComunidadFilter extends QueryFilter
-{
-
+class ComunidadFilter extends QueryFilter{
 
     public function rules(): array{
         return [
@@ -35,8 +33,6 @@ class ComunidadFilter extends QueryFilter
                 ->orWhere('id', 'like', "%{$search}%");
         });
     }
-
-
 
 
 }

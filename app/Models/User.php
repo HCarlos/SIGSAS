@@ -48,22 +48,12 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = ['password', 'remember_token','deleted_at'];
     protected $casts = ['admin'=>'boolean','alumno'=>'boolean','delegado'=>'boolean',];
     protected $dates = ['fecha_nacimiento' => 'datetime:d-m-Y'];
-//    protected $dateFormat = [''];
 
     public function scopeSearch($query, $search){
         if (!$search || $search == "" || $search == null) return $query;
         return $query->whereRaw("searchtext @@ to_tsquery('spanish', ?)", [$search])
             ->orderByRaw("ts_rank(searchtext, to_tsquery('spanish', ?)) DESC", [$search]);
     }
-
-//->orderByRaw("ap_paterno, ap_materno, nombre, curp, username ASC");
-
-
-
-    //->orHas('user_adress', function ($q) use ($search) {     return $q->whereRaw("UPPER(calle) like ?", "%{$search}%")
-//->orWhereRaw("UPPER(colonia) like ?", "%{$search}%")
-//    ->orWhereRaw("UPPER(localidad) like ?", "%{$search}%");
-//})
 
     public function scopeFilterBySearch($query, $filters){
         return (new UserFilter())->applyTo($query, $filters);

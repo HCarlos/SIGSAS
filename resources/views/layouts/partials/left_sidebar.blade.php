@@ -6,10 +6,17 @@
             <div class="ace-scroll flex-grow-1 mt-1px" data-ace-scroll="{}"><!-- optional `nav` tag -->
                 <nav class="pt-3" aria-label="Main">
                     <ul class="nav flex-column has-active-border">
-                        <li class="nav-item {{ str_contains(url()->current(), 'home') ? 'active': ''}}">
-                            <a class="nav-link" href="{{ route('home') }}">
+                        <li class="nav-item {{ str_contains(url()->current(), 'dashboard') ? 'active': ''}}">
+                            <a class="nav-link" href="{{ route('dashboard') }}">
                                 <i class="nav-icon fa fa-home"></i>
-                                <span class="nav-text fadeable">Home</span>
+                                <span class="nav-text fadeable">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ str_contains(url()->current(), 'listDenuncias') ? 'active': ''}}">
+                            <a class="nav-link" href="{{ route('listDenuncias') }}">
+                                <i class="nav-icon fa fa-page4"></i>
+                                <span class="nav-text fadeable">Denuncias</span>
                             </a>
                         </li>
 

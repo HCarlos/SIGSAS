@@ -1,6 +1,5 @@
 @extends('layouts.app_auth')
 @section('content')
-
     <!-- Main Content -->
 {{--    <div role="main" class="main-content">--}}
         <!-- Page Content -->

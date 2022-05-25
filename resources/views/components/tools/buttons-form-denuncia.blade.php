@@ -3,7 +3,7 @@
     <div class="col-md-6 ">
         <div class="grid-container">
             @isset($item)
-                @include('shared.ui_kit.__button_form_close_denuncia')
+                @include('SIGSAS.xFiles.UI_Kit.__button_form_close_denuncia')
             @endisset
             @if($msgLeft)
                 {{$msgLeft}}
@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-6">
         <div class="grid-container">
-            @include('shared.ui_kit.__button_form_denuncia')
+            @include('SIGSAS.xFiles.UI_Kit.__button_form_denuncia')
         </div>
     </div>
 </div>

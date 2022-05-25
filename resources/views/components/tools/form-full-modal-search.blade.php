@@ -1,4 +1,4 @@
-@include('shared.code.__errors')
+@include('SIGSAS.xFiles.Codes.__errors')
 <form method="{{$metodo}}" action="{{ route($action) }}" id="formFullModal">
     {{$_csrf}}
     <div class="modal-header modal-colored-header bg-info">
@@ -17,5 +17,4 @@
         </button>
     </div>
 </form>
-{{--@include('shared.code.__ajax_form_full_modal_with_errors')--}}
 

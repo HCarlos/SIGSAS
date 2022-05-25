@@ -1,6 +1,6 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.home')
     @slot('titulo_catalogo',$titulo_catalogo)

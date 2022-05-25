@@ -4,10 +4,8 @@ namespace App\Http\Requests\SIGSAS\Denuncia\Imagene;
 
 use App\Classes\GeneralFunctions;
 use App\Classes\MessageAlertClass;
-//use App\Classes\GeneralFunctions;
 use App\Models\SIGSAS\Denuncias\Denuncia;
 use App\Models\SIGSAS\Denuncias\Imagene;
-//use App\Models\SIGSAS\Denuncias\Respuesta;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\QueryException;
@@ -52,18 +50,20 @@ class ImagenAImagenRequest extends FormRequest
                 'denuncia__id'  => $this->denuncia__id,
                 'parent__id'     => $this->imagen__id,
             ];
-//            dd($Item);
+
+//            dd($this->imagen__id);
+
             if ((int)$this->imagen__id > 0) {
                 $item = Imagene::create($Item);
+                $this->attaches($item);
+                $this->saveFile($item);
             }
-            $this->attaches($item);
-            $this->saveFile($item);
 
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
             return $Msg->Message($e);
         }
-        return $item;
+        return $item ?? null;
 
     }
 

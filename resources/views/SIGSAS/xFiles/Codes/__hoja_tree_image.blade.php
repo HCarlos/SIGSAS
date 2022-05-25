@@ -11,9 +11,9 @@
             <div class=" pl-2 col-md-12">
                 <h4 class="media-heading">{{$item->titulo}} <small>{{$item->fecha}}</small>
                     <span class=" table-action button-list pl-2 ">
-                        @include('shared.ui_kit.__edit_item_modal')
-                        @include('shared.ui_kit.__remove_item')
-                        @include('shared.ui_kit.__imagen_a_imagen_item')
+                        @include('SIGSAS.xFiles.UI_Kit.__edit_item_modal')
+                        @include('SIGSAS.xFiles.UI_Kit.__remove_item')
+                        @include('SIGSAS.xFiles.UI_Kit.__imagen_a_imagen_item')
                     </span>
                 </h4>
                 <div class="row ">
@@ -22,7 +22,7 @@
                                 {{$item->descripcion}}<br>
                                 <small>{{$item->momento}}</small>
                             @if(count($item->childs))
-                                @include('shared.code.__hoja_tree_image',['items'=>$item->childs])
+                                @include('SIGSAS.xFiles.Codes.__hoja_tree_image',['items'=>$item->childs])
                             @endif
                         </div>
                         <div class="col-md-12"></div>
