@@ -22,9 +22,14 @@ trait ImageneTrait
 
     // Get Image
     public function getPathImageAttribute(){
-        $exists = Storage::disk($this->disk)->exists($this->image);
+//        $exists = Storage::disk($this->disk)->exists($this->image);
+        $file = "/storage/" . $this->disk."/".$this->image;
+        $exists = file_exists($file);
+
+//        dd( $exists );
+
         $ret = $exists
-            ? "/storage/".$this->disk."/".$this->image
+            ? "/storage/" . $this->disk."/".$this->image
             : '/images/web/file-not-found.png';
         return $ret;
     }
@@ -37,6 +42,7 @@ trait ImageneTrait
         $flImg = config("atemun.images_type_extension");
         if ( in_array( $dg, $flDoc ) ) {
             $rt = '/images/web/document-file.png';
+//            $rt =  "/storage/" . $this->disk."/".$this->image;
         }elseif (in_array( $dg, $flImg ) ) {
             $exists = Storage::disk($this->disk)->exists($this->image);
             //dd($exists);
