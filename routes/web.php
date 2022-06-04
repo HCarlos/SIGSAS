@@ -16,7 +16,10 @@ use App\Http\Controllers\SIGSAS\Domicilio\UbicacionController;
 use App\Http\Controllers\SIGSAS\External\HojaDenunciaArchivoController;
 use App\Http\Controllers\SIGSAS\External\ListDenunciaXLSXController;
 use App\Http\Controllers\SIGSAS\External\HojaDenunciaController;
+use App\Http\Controllers\SIGSAS\External\ListModelXLSXController;
+use App\Http\Controllers\SIGSAS\Storage\StorageExternalFilesController;
 use App\Http\Controllers\SIGSAS\Storage\StorageProfileController;
+use App\Http\Controllers\SIGSAS\User\ListUserXLSXController;
 use App\Http\Controllers\SIGSAS\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -233,17 +236,18 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
 
 
 
+    // EXTERNAL FILES
+    Route::get('archivosConfig',[StorageExternalFilesController::class,'archivos_config'])->name('archivosConfig');
+    Route::post('subirArchivoBase',[StorageExternalFilesController::class,'subirArchivoBase'])->name('subirArchivoBase');
+    Route::post('quitarArchivoBase',[StorageExternalFilesController::class,'quitarArchivoBase'])->name('quitarArchivoBase/');
+    Route::post('quitarArchivoBase',[StorageExternalFilesController::class,'quitarArchivoBase'])->name('quitarArchivoBase');
+    Route::post('showFileListUserExcel1A',[StorageExternalFilesController::class,'getListUserXLSX'])->name('showFileListUserExcel1A');
 
+    Route::post('showFileListUserExcel1A',[ListUserXLSXController::class,'getListUserXLSX'])->name('showFileListUserExcel1A/');
+    Route::post('getUserByRoleToXLSX',[ListUserXLSXController::class,'getUserByRoleToXLSX'])->name('getUserByRoleToXLSX');
 
+    Route::post('getModelListXlS/{model}',[ListModelXLSXController::class,'getListModelXLSX'])->name('getModelListXlS');
 
-//    Route::get('quitarArchivoBase/{driver}/{archivo}', 'Storage\StorageExternalFilesController@quitarArchivoBase')->name('quitarArchivoBase/');
-    Route::post('quitarArchivoBase', 'Storage\StorageExternalFilesController@quitarArchivoBase')->name('quitarArchivoBase');
-
-    Route::post('showFileListUserExcel1A','External\User\ListUserXLSXController@getListUserXLSX')->name('showFileListUserExcel1A');
-
-    Route::post('getUserByRoleToXLSX','External\User\ListUserXLSXController@getUserByRoleToXLSX')->name('getUserByRoleToXLSX');
-
-    Route::post('getModelListXlS/{model}','External\ListModelXLSXController@getListModelXLSX')->name('getModelListXlS');
 
 
 });

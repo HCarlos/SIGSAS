@@ -99,6 +99,7 @@ return array(
     'App\\Http\\Controllers\\SIGSAS\\Storage\\StorageDenunciaController' => $baseDir . '/app/Http/Controllers/SIGSAS/Storage/StorageDenunciaController.php',
     'App\\Http\\Controllers\\SIGSAS\\Storage\\StorageExternalFilesController' => $baseDir . '/app/Http/Controllers/SIGSAS/Storage/StorageExternalFilesController.php',
     'App\\Http\\Controllers\\SIGSAS\\Storage\\StorageProfileController' => $baseDir . '/app/Http/Controllers/SIGSAS/Storage/StorageProfileController.php',
+    'App\\Http\\Controllers\\SIGSAS\\User\\ListUserXLSXController' => $baseDir . '/app/Http/Controllers/SIGSAS/User/ListUserXLSXController.php',
     'App\\Http\\Controllers\\SIGSAS\\User\\UserController' => $baseDir . '/app/Http/Controllers/SIGSAS/User/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Livewire\\UsersTable' => $baseDir . '/app/Http/Livewire/UsersTable.php',

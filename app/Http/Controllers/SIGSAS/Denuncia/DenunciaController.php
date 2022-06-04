@@ -96,15 +96,11 @@ class DenunciaController extends Controller{
     }
 
     protected function newItem(){
-//        $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
-
         $IsEnlace = Session::get('IsEnlace');
         if($IsEnlace){
             $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
-            //dd($DependenciaArray);
             $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
-            //dd($Dependencias);
 
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
@@ -150,18 +146,15 @@ class DenunciaController extends Controller{
     protected function editItem($Id){
 
         $item         = Denuncia::find($Id);
-//        $Prioridades  = Prioridad::all()->sortBy('prioridad');
         $Origenes     = Origen::all()->sortBy('origen');
 
         $IsEnlace = Session::get('IsEnlace');
         if($IsEnlace){
             $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
-//            $Dependencias = Dependencia::all()->whereIn('dependencia',$DependenciaArray,true)->sortBy('dependencia');
             $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
         }else{
             $Dependencias = Dependencia::all()->sortBy('dependencia');
         }
-
 
         $Servicios = Servicio::getQueryServiciosFromDependencias($item->dependencia_id);
 

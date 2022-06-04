@@ -27,6 +27,15 @@
                             </a>
                         </li>
 
+                        @if (Auth::user()->hasRole('Administrator|SysOp'))
+                            <li class="nav-item  {{ str_contains(url()->current(), 'archivosConfig') ? 'active': ''}} ">
+                                <a href="{{route('archivosConfig')}}" class="nav-link  ">
+                                    <i class="fas fa-file-excel"></i>
+                                    <span class="nav-text fa-cog">Formatos Excel</span>
+                                </a>
+                            </li>
+                        @endif
+
                     </ul>
                 </nav>
 

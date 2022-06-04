@@ -138,6 +138,7 @@ class ImageneController extends Controller{
                 'Route'       => 'saveImageneDen',
                 'Method'      => 'POST',
                 'items_forms' => 'SIGSAS.Denuncia.Images.imagene_upload',
+                'imagen_id'   => 0,
                 'IsNew'       => true,
                 'denuncia_id' => $denuncia_id,
                 'user'        => $user,

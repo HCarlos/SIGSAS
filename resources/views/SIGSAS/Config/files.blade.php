@@ -1,6 +1,6 @@
 @extends(Auth::user()->Home)
 
-@section('container')
+@section('body-home')
 
 @component('components.home')
     @slot('titulo_catalogo','Archivos de Configuración')
@@ -40,7 +40,7 @@
 
                 <div class="card card-atemun">
                     <div class="card-body">
-                        <form method="post" action="{{ action('Storage\StorageExternalFilesController@subirArchivoBase') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('subirArchivoBase') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="categ_file" class=" control-label {{$errors->has('categ_file')?'text-danger':''}}">Categoría de Archivo</label>

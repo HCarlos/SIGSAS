@@ -1,20 +1,20 @@
-<div class="grid-structure">
+<div class="col-md-12">
 <div class=" row">
     <div class="col-lg-6 ">
         <div class="grid-container">
             <div class="form-row mb-1">
                 <label for = "search_autocomplete_user" class="col-lg-3 col-form-label labelDenuncia">Buscar Usuario</label>
                 <div class="col-lg-12">
-                    <div class="input-group">
+                    <div class="input-group btn-group-xs">
                         {!! Form::text('search_autocomplete_user', $items->Ciudadano->FullName, array('placeholder' => 'Buscar usuario...','class' => 'form-control','id'=>'search_autocomplete_user')) !!}
                         <span class="input-group-append">
-                            <a href="{{route("newUser")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                            <a href="{{route("newUser")}}" target="_blank" class="btn btn-info btn-info"> <i class="fa fa-user-plus"></i></a>
                         </span>
                     </div>
                     <div class="input-group btn-group-xs">
                     {!! Form::text('usuario', $items->Ciudadano->FullName, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
                         <span class="input-group-append">
-                            <a  href="{{route("editUser",['Id'=>$items->Ciudadano->id])}}" target="_blank" class="btn btn-xs btn-icon btn-primary editUser" id="editUser" name="editUser"> <i class="mdi mdi-account-edit text-white "></i></a>
+                            <a  href="{{route("editUser",['Id'=>$items->Ciudadano->id])}}" target="_blank" class="btn btn-a-info btn-info editUser" id="editUser" name="editUser"> <i class="fa fa-user-edit"></i></a>
                         </span>
                     </div>
                     {!! Form::text('usuario_domicilio', $items->Ciudadano->ubicaciones->first()->Ubicacion, array('class' => 'form-control','id'=>'usuario_domicilio','readonly'=>'readonly')) !!}
@@ -39,7 +39,7 @@
                     <div class="input-group">
                         {!! Form::text('search_autocomplete',  $items->Ubicacion->Ubicacion, array('placeholder' => 'Buscar ubicación...','class' => 'form-control','id'=>'search_autocomplete')) !!}
                         <span class="input-group-append">
-                            <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                            <a href="{{route("newUbicacion")}}" target="_blank" class="btn btn-icon btn-info"> <i class="fa fa-book-open"></i></a>
                         </span>
                     </div>
                     <input type="text" name="ubicacion" id="ubicacion" value="{{ old('ubicacion', $items->Ubicacion->Ubicacion) }}" class="form-control" disabled/>
@@ -200,7 +200,7 @@
                                         <img class="media-object" src="{{asset($item->PathImageThumb)}}" width="64" height="64" >
                                     </a>
                                 </td>
-                                <td>{{ asset("/storage/denuncia/".$item->image) }}</td>
+                                <td>{{ asset("/storage/denuncia/" . $item->image) }}</td>
                                 <td>
                                     @include('SIGSAS.xFiles.UI_Kit.__remove_item')
                                 </td>
@@ -256,7 +256,6 @@
     </div> <!-- end col-->
 </div>
 
-</div>
 
 
 <hr>

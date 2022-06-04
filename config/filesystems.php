@@ -74,7 +74,6 @@ return [
             'visibility' => env('DENUNCIA_VISIBILITY'),
         ],
 
-
     ],
 
     /*

@@ -22,14 +22,11 @@ trait ImageneTrait
 
     // Get Image
     public function getPathImageAttribute(){
-//        $exists = Storage::disk($this->disk)->exists($this->image);
+        $exists = Storage::disk($this->disk)->exists($this->image);
         $file = "/storage/" . $this->disk."/".$this->image;
-        $exists = file_exists($file);
-
-//        dd( $exists );
 
         $ret = $exists
-            ? "/storage/" . $this->disk."/".$this->image
+            ? $file
             : '/images/web/file-not-found.png';
         return $ret;
     }
@@ -45,9 +42,12 @@ trait ImageneTrait
 //            $rt =  "/storage/" . $this->disk."/".$this->image;
         }elseif (in_array( $dg, $flImg ) ) {
             $exists = Storage::disk($this->disk)->exists($this->image);
+            $file = "/storage/" . $this->disk."/".$this->image;
+//            $exists = file_exists($file);
+
             //dd($exists);
             $rt = $exists
-                ? "/storage/" . $this->disk."/".$this->image
+                ? $file
                 : '/images/web/file-not-found.png';
         }else{
             $rt = '/images/web/file-not-found.png';

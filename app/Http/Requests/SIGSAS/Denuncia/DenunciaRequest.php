@@ -34,7 +34,6 @@ class DenunciaRequest extends FormRequest
         return parent::all();
     }
 
-
     public function authorize(){
         return true;
     }
@@ -152,8 +151,8 @@ class DenunciaRequest extends FormRequest
 
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();
-//            dd($Msg->Message());
-            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
+            dd( $Msg->Message($e) );
+//            throw new HttpResponseException(response()->json( $Msg->Message($e), 422));
         }
         return $item;
 
@@ -164,12 +163,12 @@ class DenunciaRequest extends FormRequest
             $item = Denuncia::create($Item);
         } else {
             $item = Denuncia::find($this->id);
-            if ($item->cerrado == false){
+            if (!$item->cerrado){
                 $this->detaches($item);
                 $item->update($Item);
             }
         }
-        if ($item->cerrado == false) {
+        if (!$item->cerrado) {
             $this->attaches($item);
             $Storage = new StorageDenunciaController();
             $Storage->subirArchivoDenuncia($this, $item);
@@ -208,8 +207,7 @@ class DenunciaRequest extends FormRequest
         return $Item;
     }
 
-    protected function getRedirectUrl()
-    {
+    protected function getRedirectUrl(){
         $url = $this->redirector->getUrlGenerator();
         if ($this->id > 0){
             return $url->route($this->redirectRoute,['Id'=>$this->id]);
