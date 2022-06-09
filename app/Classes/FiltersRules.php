@@ -27,11 +27,7 @@ class FiltersRules
         $data['incluirFecha']   = $data['incluirFecha']   == null ? "" : $data['incluirFecha'];
         $data['conRespuesta']   = $data['conRespuesta']   == null ? "" : $data['conRespuesta'];
 
-        if ( Auth::user()->isRole('ENLACE') ) {
-            $data['dependencia_id'] = Auth::user()->IsEnlaceDependencia;
-        }else{
-            $data['dependencia_id'] = $data['dependencia_id'] == null ? "" : $data['dependencia_id'];
-        }
+        $data['dependencia_id'] = $data['dependencia_id'] == null ? "" : $data['dependencia_id'];
 
         $data['servicio_id']    = $data['servicio_id']    == null ? "" : $data['servicio_id'];
         $data['estatus_id']     = $data['estatus_id']     == null ? "" : $data['estatus_id'];

@@ -22,17 +22,17 @@ class DenunciaRequest extends FormRequest
 
     protected $redirectRoute = 'editDenuncia';
 
-    public function validationData(){
-        $attributes = parent::all();
-        $IsEnlace =Auth::user()->isRole('ENLACE');
-        $DependenciaArray = '';
-        IF ($IsEnlace) {
-            $DependenciaIdArray = Auth::user()->DependenciaIdArray;
-            $attributes['dependencia_id'] = $DependenciaIdArray;
-        }
-        $this->replace($attributes);
-        return parent::all();
-    }
+//    public function validationData(){
+//        $attributes = parent::all();
+//        $IsEnlace =Auth::user()->isRole('ENLACE');
+//        $DependenciaArray = '';
+//        IF ($IsEnlace) {
+//            $DependenciaIdArray = Auth::user()->DependenciaIdArray;
+//            $attributes['dependencia_id'] = $DependenciaIdArray;
+//        }
+//        $this->replace($attributes);
+//        return parent::all();
+//    }
 
     public function authorize(){
         return true;
@@ -136,18 +136,9 @@ class DenunciaRequest extends FormRequest
                 'observaciones'                => strtoupper(trim($this->observaciones)),
 
             ];
-            //dd($Item);
-            if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_SIAC|USER_OPERATOR_ADMIN|USER_SAS_ADMIN|USER_DIF_ADMIN')){
-                $item = $this->guardar($Item);
-            }elseif ( Auth::user()->isRole('ENLACE|USER_SAS_CAP|USER_DIF_CAP') ){
-                if (Auth::user()->id == $this->creadopor_id ) {
-                    $item = $this->guardar($Item);
-                }else {
-                    return null;
-                }
-            }else{
-                return null;
-            }
+
+            $item = $this->guardar($Item);
+
 
         }catch (QueryException $e){
             $Msg = new MessageAlertClass();

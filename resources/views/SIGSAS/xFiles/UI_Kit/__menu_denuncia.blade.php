@@ -4,7 +4,7 @@
             @include('SIGSAS.xFiles.UI_Kit.__toolbar_denuncia')
         </div>
         <div class="col-md-6 ">
-            <div class="mt-md-2">
+            <div class="mt-md-2 float-right mr-5">
                 {{ $items->onEachSide(1)->links() }}
             </div>
         </div>

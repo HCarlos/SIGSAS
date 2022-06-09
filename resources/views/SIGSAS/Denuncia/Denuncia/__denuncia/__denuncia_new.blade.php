@@ -8,13 +8,13 @@
                     <div class="input-group">
                         {!! Form::text('search_autocomplete_user', null, array('placeholder' => 'Buscar usuario...','class' => 'form-control','id'=>'search_autocomplete_user')) !!}
                         <span class="input-group-append">
-                            <a href="{{route("newUser")}}" target="_blank" class="btn btn-icon btn-info"> <i class="mdi mdi-plus"></i></a>
+                            <a href="{{route("newUser")}}" target="_blank" class="btn btn-icon btn-info"> <i class="fa fa-user-plus"></i></a>
                         </span>
                     </div>
                     <div class="input-group btn-group-xs">
                         {!! Form::text('usuario', null, array('class' => 'form-control','id'=>'usuario','readonly'=>'readonly')) !!}
                         <span class="input-group-append">
-                            <a  target="_blank" class="btn btn-xs btn-icon btn-primary editUser" id="editUser" name="editUser"> <i class="mdi mdi-account-edit  text-white"></i></a>
+                            <a  target="_blank" class="btn btn-info btn-info editUser" id="editUser" name="editUser"> <i class="fa fa-user-edit  text-white"></i></a>
                         </span>
                     </div>
 
@@ -133,25 +133,17 @@
             </div>
 
             <div class="form-group row mb-1">
-                <label for = "dependencia_id" class="col-lg-3 col-form-label labelDenuncia">Dependencia</label>
-                <div class="col-lg-9">
-                    <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
-                        <option value="0" selected>Seleccione una Dependencia</option>
-                        @foreach($dependencias as $t)
-                            <option value="{{$t->id}}" >{{ old('dependencia_id',$t->dependencia) }} </option>
-                        @endforeach
-
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row mb-1">
                 <label for = "servicio_id" class="col-lg-3 col-form-label labelDenuncia">Servicio</label>
                 <div class="col-lg-9">
-                    <select id="servicio_id" name="servicio_id" class="form-control" size="1" value="{{ old( 'servicio') }}">
+                    <select id="servicio_id" name="servicio_id" class="form-control" size="1">
+                        <option value="0" selected>Seleccione un Servicio</option>
+                        @foreach($servicios as $t)
+                            <option value="{{$t->id}}">{{ $t->servicio }} </option>
+                        @endforeach
                     </select>
                 </div>
             </div>
+
 
             <div class="form-group row mb-1">
                 <label for = "estatus_id" class="col-lg-3 col-form-label labelDenuncia">Estatus</label>
@@ -207,3 +199,4 @@
 <input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$user->id}}" >
 <input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
 <input type="hidden" name="usuario_id" id="usuario_id" value="0" >
+<input type="hidden" name="dependencia_id" id="dependencia_id" value="{{ config("sigsas.sas_id") }}" >

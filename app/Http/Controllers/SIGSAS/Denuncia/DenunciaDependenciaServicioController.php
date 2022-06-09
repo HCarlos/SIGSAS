@@ -51,7 +51,7 @@ class DenunciaDependenciaServicioController extends Controller
         $user = Auth::User();
         $this->Id = $Id;
 
-        return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_list',
+        return view('SIGSAS.Denuncia.Denuncia_Dependencia_Servicio.denuncia_dependencia_servicio_list',
             [
                 'items'                               => $items,
                 'Id'                                  => $this->Id,
@@ -67,6 +67,7 @@ class DenunciaDependenciaServicioController extends Controller
                 'postNew'                             => 'postAddDenunciaDependenciaServicio',
 //                'putEdit' => 'updateDenuncia',
                 'addItem'                             => 'addDenunciaDependenciaServicio',
+                'editItem'                            => 'editDenunciaDependenciaServicio',
                 'removeItem'                          => 'removeDenunciaDependenciaServicio',
                 'imprimirDenuncia'                    => "imprimirDenuncia/",
                 'showEditDenunciaDependenciaServicio' =>'listDenunciaDependenciaServicio',
@@ -96,7 +97,7 @@ class DenunciaDependenciaServicioController extends Controller
             $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
         }
 
-        return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_edit',
+        return view('SIGSAS.Denuncia.Denuncia_Dependencia_Servicio.denuncia_dependencia_servicio_edit',
             [
                 'user'            => Auth::user(),
                 'items'           => $items,
@@ -156,7 +157,7 @@ class DenunciaDependenciaServicioController extends Controller
             $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
         }
 
-        return view('SIAC.denuncia.denuncia_dependencia_servicio.denuncia_dependencia_servicio_new',
+        return view('SIGSAS.Denuncia.Denuncia_Dependencia_Servicio.denuncia_dependencia_servicio_new',
             [
                 'user'              => Auth::user(),
                 'items'             => $items,

@@ -14,11 +14,11 @@
     </div>
 </div>
 
-<table  id="tblCat" class="table table-bordered table-striped dt-responsive dataTable " role="grid" aria-describedby="datatable-buttons_info" style="width: 100%; position: relative; z-index:0;" width="100%">
+<table id="dataTable" class="td-style w-100 table text-dark-m1 text-95 border-y-1 brc-black-tp11 collapsed dtr-table dataTable" role="grid" aria-describedby="datatable-buttons_info" style="width: 100%; position: relative; z-index:0;" width="100%">
     <thead>
-    <tr role="row">
-        <th class="sorting_asc" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID</th>
-        <th class="sorting" >DEPENDENCIA</th>
+    <tr>
+        <th class="sorting">ID</th>
+        <th class="sorting">DEPENDENCIA</th>
         <th class="sorting">SERVICIO</th>
         <th class="sorting">RESPUESTA</th>
         <th class="sorting">ESTATUS</th>
@@ -33,7 +33,7 @@
         <tr>
         <td class="table-user">{{$item->id}}</td>
             <td>{{$item->dependencia->dependencia}}</td>
-                <td class="w-75">{{$item->servicio->servicio}}</td>
+                <td class="w-25">{{$item->servicio->servicio}}</td>
                     <td>{{$item->observaciones}}</td>
                     <td>{{$item->estatu->estatus}}</td>
                     <td class="text-center">@if($item->favorable==true)<i class="fas fa-check seagreen"></i> @else <i class="mdi mdi-close-box red mdi-18px"></i> @endif </td>

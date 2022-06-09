@@ -3,7 +3,7 @@
     <div class="col-md-6 ">
         <div class="grid-container">
             @isset($item)
-                @include('SIGSAS.xFiles.UI_Kit.__button_form_close_denuncia')
+{{--                @include('SIGSAS.xFiles.UI_Kit.__button_form_close_denuncia')--}}
             @endisset
             @if($msgLeft)
                 {{$msgLeft}}

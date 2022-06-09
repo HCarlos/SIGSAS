@@ -39,15 +39,7 @@
 
 <div class="form-row mb-1">
     <label for = "dependencia_id" class="col-md-2 col-form-label">Dependencia</label>
-    <div class="col-md-8">
-        <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
-            <option value="0" selected >Seleccione una Dependencia</option>
-            @foreach($dependencias as $id => $valor)
-                <option value="{{ $id }}">{{ $valor }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="col-md-2 ">
+    <div class="col-md-10">
         <div class="custom-control custom-checkbox mt-1 float-left">
             <input type="checkbox" class="custom-control-input" id="conRespuesta" name="conRespuesta">
             <label class="custom-control-label" for="conRespuesta">Con Respuesta</label>
@@ -132,4 +124,6 @@
         <small class="text-muted">La cantidad de registros, es directamente proporcional al tiempo que tarda la consulta.</small>
     </div>
 </div>
+
+<input type="hidden" name="dependencia_id" id="dependencia_id" value="{{ config("sigsas.sas_id") }}" >
 

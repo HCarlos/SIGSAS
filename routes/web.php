@@ -241,9 +241,9 @@ Route::group(['middleware' => 'role:auth|Administrator|SysOp|USER_OPERATOR_SIAC|
     Route::post('subirArchivoBase',[StorageExternalFilesController::class,'subirArchivoBase'])->name('subirArchivoBase');
     Route::post('quitarArchivoBase',[StorageExternalFilesController::class,'quitarArchivoBase'])->name('quitarArchivoBase/');
     Route::post('quitarArchivoBase',[StorageExternalFilesController::class,'quitarArchivoBase'])->name('quitarArchivoBase');
-    Route::post('showFileListUserExcel1A',[StorageExternalFilesController::class,'getListUserXLSX'])->name('showFileListUserExcel1A');
+//    Route::post('showFileListUserExcel1A',[StorageExternalFilesController::class,'getListUserXLSX'])->name('showFileListUserExcel1A');
 
-    Route::post('showFileListUserExcel1A',[ListUserXLSXController::class,'getListUserXLSX'])->name('showFileListUserExcel1A/');
+    Route::post('showFileListUserExcel1A',[ListUserXLSXController::class,'getListUserXLSX'])->name('showFileListUserExcel1A');
     Route::post('getUserByRoleToXLSX',[ListUserXLSXController::class,'getUserByRoleToXLSX'])->name('getUserByRoleToXLSX');
 
     Route::post('getModelListXlS/{model}',[ListModelXLSXController::class,'getListModelXLSX'])->name('getModelListXlS');

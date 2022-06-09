@@ -2,6 +2,7 @@
 
 namespace App\Models\SIGSAS\Denuncias;
 
+use App\Models\SIGSAS\Estructura\Dependencia;
 use App\Models\SIGSAS\Estructura\Estatu;
 use App\Models\SIGSAS\Estructura\Servicio;
 use Illuminate\Database\Eloquent\Model;

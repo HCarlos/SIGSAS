@@ -46,10 +46,6 @@ class DenunciaController extends Controller{
     {
         ini_set('max_execution_time', 300);
 
-//        if ( Auth::user()->can('consulta_500_items_general') ){
-//            $this->max_item_for_query = config("atemun.consulta_500_items_general");
-//        }
-
         $search = $request->only(['search']);
 
         $filters['filterdata'] = $request->only(['search']);;
@@ -97,20 +93,14 @@ class DenunciaController extends Controller{
 
     protected function newItem(){
         $Origenes     = Origen::all()->sortBy('origen');
-        $IsEnlace = Session::get('IsEnlace');
-        if($IsEnlace){
-            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
-            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
 
-        }else{
-            $Dependencias = Dependencia::all()->sortBy('dependencia');
-        }
-
-        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
-            $Estatus      = Estatu::all()->sortBy('estatus');
-        }else{
-            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
-        }
+        $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
+        $dependencia_id = config('sigsas.sas_id');
+        $Servicios    = Servicio::whereHas('subareas', function($p) use ($dependencia_id ) {
+            $p->whereHas("areas", function($q) use ($dependencia_id){
+                return $q->where("dependencia_id",$dependencia_id);
+            });
+        })->orderBy('servicio')->get();
 
         $this->msg = "";
         return view('SIGSAS.Denuncia.Denuncia.denuncia_new',
@@ -119,7 +109,7 @@ class DenunciaController extends Controller{
                 'editItemTitle'   => 'Nuevo',
                 'prioridades'     => $this->Prioridades,
                 'origenes'        => $Origenes,
-                'dependencias'    => $Dependencias,
+                'servicios'       => $Servicios,
                 'estatus'         => $Estatus,
                 'postNew'         => 'createDenuncia',
                 'titulo_catalogo' => ucwords($this->tableName),
@@ -148,15 +138,12 @@ class DenunciaController extends Controller{
         $item         = Denuncia::find($Id);
         $Origenes     = Origen::all()->sortBy('origen');
 
-        $IsEnlace = Session::get('IsEnlace');
-        if($IsEnlace){
-            $DependenciaIdArray = explode('|',Session::get('DependenciaIdArray'));
-            $Dependencias = Dependencia::all()->whereIn('id',$DependenciaIdArray,false)->sortBy('dependencia');
-        }else{
-            $Dependencias = Dependencia::all()->sortBy('dependencia');
-        }
-
-        $Servicios = Servicio::getQueryServiciosFromDependencias($item->dependencia_id);
+        $dependencia_id = config('sigsas.sas_id');
+        $Servicios    = Servicio::whereHas('subareas', function($p) use ($dependencia_id ) {
+            $p->whereHas("areas", function($q) use ($dependencia_id){
+                return $q->where("dependencia_id",$dependencia_id);
+            });
+        })->orderBy('servicio')->get();
 
         $user_ubicacion = $item->Ciudadano->ubicaciones->first->id->id;
 
@@ -166,11 +153,7 @@ class DenunciaController extends Controller{
             $pregunta1 = 1;
         }
 
-        if (Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN') ) {
-            $Estatus      = Estatu::all()->sortBy('estatus');
-        }else{
-            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
-        }
+        $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
 
         $this->msg = "";
         return view('SIGSAS.Denuncia.Denuncia.denuncia_edit',
@@ -178,7 +161,6 @@ class DenunciaController extends Controller{
                 'user'            => Auth::user(),
                 'prioridades'     => $this->Prioridades,
                 'origenes'        => $Origenes,
-                'dependencias'    => $Dependencias,
                 'servicios'       => $Servicios,
                 'estatus'         => $Estatus,
                 'items'           => $item,
@@ -276,25 +258,15 @@ class DenunciaController extends Controller{
 
     protected function showModalSearchDenuncia(){
 
-        if (Auth::user()->isRole('ENLACE')){
 
-            $dep_id = intval(Auth::user()->IsEnlaceDependencia);
-            $Dependencias = Dependencia::all()->where('id',$dep_id)->sortBy('dependencia')->pluck('dependencia','id');
-            $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
-                $p->whereHas("areas", function($q) use ($dep_id){
-                    return $q->where("dependencia_id",$dep_id);
-                });
-            })->orderBy('servicio')->get()->pluck('servicio','id');
-        }else{
-            $Dependencias = Dependencia::all()->sortBy('dependencia')->pluck('dependencia','id');
-            $Servicios    = Servicio::all()->where('')->sortBy('servicio')->pluck('servicio','id');
-        }
+        $dep_id = config('sigsas.sas_id'); // intval(Auth::user()->IsEnlaceDependencia);
+        $Servicios = Servicio::whereHas('subareas', function($p) use ($dep_id) {
+            $p->whereHas("areas", function($q) use ($dep_id){
+                return $q->where("dependencia_id",$dep_id);
+            });
+        })->orderBy('servicio')->get()->pluck('servicio','id');
 
-        if(Auth::user()->isRole('Administrator|SysOp|USER_OPERATOR_ADMIN|USER_ARCHIVO_ADMIN')){
-            $Estatus      = Estatu::all()->sortBy('estatus');
-        }else{
-            $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
-        }
+        $Estatus      = Estatu::all()->where('estatus_cve',1)->sortBy('estatus');
 
         $Origenes     = Origen::all()->sortBy('origen');
 
@@ -309,7 +281,6 @@ class DenunciaController extends Controller{
         return view ('SIGSAS.Denuncia.Search.denuncia_search_panel',
             [
                 'findDataInDenuncia' => 'findDataInDenuncia',
-                'dependencias'       => $Dependencias,
                 'capturistas'        => $Capturistas,
                 'servicios'          => $Servicios,
                 'estatus'            => $Estatus,
@@ -326,12 +297,7 @@ class DenunciaController extends Controller{
         $filters = new FiltersRules();
 
         $queryFilters = $filters->filterRulesDenuncia($request);
-//        dd($queryFilters);
 
-//        if ( Auth::user()->can('consulta_500_items_general') ){
-//            $this->max_item_for_query = config("atemun.consulta_500_items_general");
-//        }
-//
         $req = $request->only(['items_for_query']);
         if ( isset($req['items_for_query'])){
             $this->max_item_for_query = $req['items_for_query'];
@@ -377,92 +343,5 @@ class DenunciaController extends Controller{
 
     }
 
-// ***************** ELIMINA EL ITEM VIA AJAX ++++++++++++++++++++ //
-    protected function getServiciosFromDependencias($id= 0){
-
-        $item = Servicio::getQueryServiciosFromDependencias($id);
-
-        if (isset($item)) {
-            return Response::json(['mensaje' => 'OK', 'data' => $item, 'status' => '200'], 200);
-        } else {
-            return Response::json(['mensaje' => 'Error', 'data' => dd($item), 'status' => '200'], 200);
-        }
-
-    }
-
-    protected function closeItem($id){
-        $item    = Denuncia::find($id);
-        $estatus = Estatu::all()->where('estatus','CERRADO')->first();
-        if (isset($item)) {
-            $item->estatus_id = $estatus->id;
-            $item->cerrado = true;
-            $item->fecha_cerrado = now();
-            $item->cerradopor_id = Auth::user()->id;
-            $item->save();
-
-            $item->estatus()->attach($estatus);
-            $item->dependencias()->attach($item->dependencia_id,['servicio_id'=>$item->servicio_id,'estatu_id'=>$estatus->id,'fecha_movimiento' => now(),'observaciones' => 'CERRADO CON ÉXITO!' ]);
-
-            return Response::json(['mensaje' => 'Documento cerrado con éxito', 'data' => 'OK', 'status' => '200'], 200);
-        } else {
-            return Response::json(['mensaje' => 'No se pudo cerrar el documento.', 'data' => 'Error', 'status' => '200'], 200);
-        }
-
-    }
-
-    protected function signItem($id){
-        $den    = Denuncia::find($id);
-        if (isset($den)) {
-
-            $FOLIO = "DAC-".str_pad($id,6,'0',STR_PAD_LEFT)."-".$den->fecha_ingreso->format('y');
-            $timex  = $den->fecha_ingreso->format('d-m-Y H:i:s');
-
-            $archivo_cer = "hirc711126jt0.pem";
-            $archivo_key = "Claveprivada_FIEL_HIRC711126JT0_20211206_140329.pem";
-            $mensaje     = public_path() . "/signature/mensaje.txt";
-            $firmado     = public_path() . "/signature/firmado.txt";
-            $pem         = public_path() . "/signature/".$archivo_cer;
-            $key_pem     = public_path() . "/signature/".$archivo_key;
-            $phrase      = 'NxsWry2K_';
-            $fp          = fopen(public_path() . "/signature/mensaje.txt", "w");
-
-            $cadena_original = $den->id . '|' . $FOLIO . '|' . $timex . '|' . $den->ciudadano->id . '|' . $den->ciudadano->username . '|' . $den->ciudadano->FullName . '|' . $den->creadopor->id . '|' . $den->creadopor->username . '|' . $den->creadopor->FullName . '|' . $den->dependencia_id . '|' . $den->ubicacion_id . '|' . $den->servicio_id . '|' . $den->estatus_id;
-            $hash = sha1($cadena_original);
-
-            fwrite($fp, $hash);
-            fclose($fp);
-
-            $key = $key_pem;
-            $fp = fopen($key, "r");
-            $priv_key = fread($fp, 8192);
-
-            $pkeyid = openssl_get_privatekey($priv_key);
-
-            if (openssl_sign($mensaje, $firmado, $pkeyid, OPENSSL_ALGO_SHA1)) {
-                $sello = base64_encode($firmado);
-            }
-
-            $firma = Firma::create([
-                'archivo_cer'     => $archivo_cer,
-                'sello_cer'       => $pem,
-                'archivo_key'     => $archivo_key,
-                'sello_key'       => $key_pem,
-                'password'        => $phrase,
-                'cadena_original' => $cadena_original,
-                'hash'            => $hash,
-                'sello'           => $sello,
-                'valido'          => true,
-                'fecha_firmado'   => now(),
-                'firmadopor_id'   => Auth::user()->id,
-            ]);
-            $den->firmado = true;
-            $den->save();
-            $den->firmas()->attach($firma);
-
-            return Response::json(['mensaje' => 'Documento firmado con éxito', 'data' => 'OK', 'status' => '200'], 200);
-
-        }
-
-    }
 
 }

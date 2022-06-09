@@ -12,14 +12,6 @@
         aCol[nCols - 1] = {"sorting": false};
         if (aCol.length > 0 ){
 
-            // $.extend( true, $.fn.dataTable.defaults, {
-            //     dom:
-            //         "<'row'<'col-12 col-sm-6'l><'col-12 col-sm-6 text-right table-tools-col'f>>" +
-            //         "<'row'<'col-12'tr>>" +
-            //         "<'row'<'col-12 col-md-5'i><'col-12 col-md-7'p>>",
-            //     renderer: 'bootstrap'
-            // })
-
             // var $_table = $(".dataTable").DataTable({
             var $_table = $(".dataTable").DataTable({
                 searching: true,
@@ -102,7 +94,7 @@
 
             // Nombre del Modal Form
             $("#modalFull .modal-content").empty();
-            $("#modalFull .modal-content").html('<div class="fa-2x m-2"><i class="fa fa-cog fa-spin"></i>Cargando datos...</div>');
+            $("#modalFull .modal-content").html('<div class="fa-2x m-2"><i class="fa fa-cog fa-spin"></i>Cargando formulario...</div>');
             $("#modalFull").modal('show');
 
             $(function () {

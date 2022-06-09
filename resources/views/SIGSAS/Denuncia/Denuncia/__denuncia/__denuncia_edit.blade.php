@@ -129,18 +129,6 @@
             </div>
 
             <div class="form-group row mb-1">
-                <label for = "dependencia_id" class="col-lg-3 col-form-label labelDenuncia">Dependencia</label>
-                <div class="col-lg-9">
-                    <select id="dependencia_id" name="dependencia_id" class="form-control" size="1">
-                        <option value="0" selected>Seleccione una Dependencia</option>
-                        @foreach($dependencias as $t)
-                            <option value="{{$t->id}}" {{ $t->id == $items->dependencia_id ? 'selected': '' }} >{{ $t->dependencia }} </option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row mb-1">
                 <label for = "servicio_id" class="col-lg-3 col-form-label labelDenuncia">Servicio</label>
                 <div class="col-lg-9">
                     <select id="servicio_id" name="servicio_id" class="form-control" size="1">
@@ -265,3 +253,4 @@
 <input type="hidden" name="creadopor_id" id="creadopor_id" value="{{$items->creadopor_id}}" >
 <input type="hidden" name="modificadopor_id" id="modificadopor_id" value="{{$user->id}}" >
 <input type="hidden" name="usuario_id" id="usuario_id" value="{{$items->Ciudadano->id}}" >
+<input type="hidden" name="dependencia_id" id="dependencia_id" value="{{ config("sigsas.sas_id") }}" >

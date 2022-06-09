@@ -37,6 +37,7 @@ return [
     'minimo_registrios_consulta' => 1000,
     'items_for_table'            => 100,
 
+    'sas_id'                     => env("SAS_ID"),
 
 
     // -----------------------------------------------------------

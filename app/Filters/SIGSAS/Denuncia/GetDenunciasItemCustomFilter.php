@@ -20,31 +20,10 @@ class GetDenunciasItemCustomFilter extends QueryFilter{
     public function filterdata($query, $search){
         $search = isset($search['search']) ? $search['search'] : '';
         $search = strtoupper($search);
-//        dd( $search );
-        $IsEnlace =Auth::user()->isRole('ENLACE');
-        $IsAdminArchivo =Auth::user()->isRole('USER_ARCHIVO_ADMIN');
-        $DependenciaArray = '';
-        $DependenciaIdArray = 0;
-        IF ($IsEnlace) {
-            $DependenciaIdArray = Auth::user()->DependenciaIdArray;
-            $filters['dependencia_id'] = $DependenciaIdArray;
-            $filters['search'] = $search;
-        }elseif ($IsAdminArchivo){
-                $filters['cerrado'] = 'true';
-        }elseif ( Auth::user()->isRole('CIUDADANO|DELEGADO') && !Auth::user()->isRole('Administrator|SysOp') ){
-            $filters['ciudadano_id'] = Auth::user()->id;
-        }else{
-            $filters['search'] = $search;
-        }
-        session(['IsEnlace' => $IsEnlace]);
-        session(['IsAdminArchivo' => $IsAdminArchivo]);
-        session(['DependenciaArray' => $DependenciaArray]);
-        session(['DependenciaIdArray' => $DependenciaIdArray]);
+        $filters['dependencia_id'] = config("sigsas.sas_id");
+        $filters['search'] = $search;
+
         return $query->filterBy($filters);
-
-    }
-
-    public function validIsEnlace(){
 
     }
 

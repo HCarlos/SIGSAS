@@ -40,7 +40,7 @@ class DenunciaCiudadanaController extends Controller{
 
         $user = Auth::User();
 
-        return view('SIAC.denuncia.denuncia_ciudadana.denuncia_ciudadana_list',
+        return view('SIGSAS.Denuncia.Denuncia_Ciudadana.denuncia_ciudadana_list',
             [
                 'items'                           => $items,
                 'titulo_catalogo'                 => "Mis " . ucwords($this->tableName),
@@ -77,7 +77,7 @@ class DenunciaCiudadanaController extends Controller{
         $this->msg    = "";
 
 
-        return view('SIAC.denuncia.denuncia_ciudadana.denuncia_ciudadana_new',
+        return view('SIGSAS.Denuncia.Denuncia_Ciudadana.denuncia_ciudadana_new',
             [
                 'user'            => Auth::user(),
                 'editItemTitle'   => 'Nuevo',

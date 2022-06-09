@@ -15,14 +15,14 @@
 
                         <li class="nav-item {{ str_contains(url()->current(), 'listDenuncias') ? 'active': ''}}">
                             <a class="nav-link" href="{{ route('listDenuncias') }}">
-                                <i class="nav-icon fa fa-page4"></i>
-                                <span class="nav-text fadeable">Denuncias</span>
+                                <i class="nav-icon fa fa-archive"></i>
+                                <span class="nav-text fadeable">SIAC</span>
                             </a>
                         </li>
 
                         <li class="nav-item  {{ str_contains(url()->current(), 'userList') ? 'active': ''}} ">
                             <a href="{{ route('userList') }}" class="nav-link  ">
-                                <i class="nav-icon fa fa-edit"></i>
+                                <i class="nav-icon fa fa-users"></i>
                                 <span class="nav-text fadeable">Usuarios</span>
                             </a>
                         </li>
@@ -30,8 +30,8 @@
                         @if (Auth::user()->hasRole('Administrator|SysOp'))
                             <li class="nav-item  {{ str_contains(url()->current(), 'archivosConfig') ? 'active': ''}} ">
                                 <a href="{{route('archivosConfig')}}" class="nav-link  ">
-                                    <i class="fas fa-file-excel"></i>
-                                    <span class="nav-text fa-cog">Formatos Excel</span>
+                                    <i class="nav-icon fa fa-file-excel"></i>
+                                    <span class="nav-text fadeable">Archivos</span>
                                 </a>
                             </li>
                         @endif
