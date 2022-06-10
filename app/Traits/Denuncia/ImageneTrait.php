@@ -13,6 +13,7 @@
 namespace App\Traits\Denuncia;
 
 
+use App\Classes\GeneralFunctions;
 use Illuminate\Support\Facades\Storage;
 
 trait ImageneTrait
@@ -24,10 +25,10 @@ trait ImageneTrait
     public function getPathImageAttribute(){
         $path = config('sigsas.public_url');
         $root = trim($this->root) == "" || trim($this->root) == "NULL" || is_null($this->root) ? $path : $this->root;
-        $exists = Storage::disk($this->disk)->exists($this->image);
+
         $file = $root."/storage/" . $this->disk."/".$this->image;
 
-        $ret = $exists
+        $ret =  GeneralFunctions::remoteFileExists($root)
             ? $file
             : $root.'/images/web/file-not-found.png';
         return $ret;
@@ -37,6 +38,7 @@ trait ImageneTrait
     public function getPathImageThumbAttribute(){
         $path = config('sigsas.public_url');
         $root = trim($this->root) == "" || trim($this->root) == "NULL" || is_null($this->root) ? $path : $this->root;
+//        dd($root);
         $fl   = explode('.',$this->image);
         $dg   = $fl[count($fl)-1];
         $flDoc = config("atemun.document_type_extension");
@@ -45,12 +47,8 @@ trait ImageneTrait
             $rt = $root.'/images/web/document-file.png';
 //            $rt =  "/storage/" . $this->disk."/".$this->image;
         }elseif (in_array( $dg, $flImg ) ) {
-            $exists = Storage::disk($this->disk)->exists($this->image);
             $file = $root."/storage/" . $this->disk."/".$this->image;
-//            $exists = file_exists($file);
-
-            //dd($exists);
-            $rt = $exists
+            $rt =  GeneralFunctions::remoteFileExists($root)
                 ? $file
                 : $root.'/images/web/file-not-found.png';
         }else{

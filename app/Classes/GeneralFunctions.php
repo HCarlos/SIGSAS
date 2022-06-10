@@ -165,7 +165,7 @@ class GeneralFunctions extends App {
     }
 
     public function validImage($model, $storage, $root, $type=1){
-        $ext = config('ibt.images_type_extension');
+        $ext = config('sigsas.images_type_extension');
         for ($i=0;$i<count($ext);$i++){
             $p1 = $model->id.'.'.$ext[$i];
             $p2 = '_'.$model->id.'.png';
@@ -266,6 +266,23 @@ class GeneralFunctions extends App {
             $id = $Obj->id;
         }
         return Response::json(['mensaje' => 'Dato agregado con éxito', 'data' => 'OK', 'status' => '200'], 200);
+    }
+
+    public static function remoteFileExists($url) {
+//        $curl = curl_init($url);
+//        curl_setopt($curl, CURLOPT_NOBODY, true);
+//        $result = curl_exec($curl);
+//        $ret = false;
+//        if ($result !== false) {
+//            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+//            if ($statusCode == 200) {
+//                $ret = true;
+//            }
+//        }
+//        curl_close($curl);
+//        return $ret;
+        return file_get_contents($url,0,null,0,1);
+
     }
 
 
