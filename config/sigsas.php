@@ -38,6 +38,8 @@ return [
     'items_for_table'            => 100,
 
     'sas_id'                     => env("SAS_ID"),
+    'modificar_fecha_ingreso'    => env('MODIFICAR_FECHA_INGRESO','NO'),
+    'public_url'                 => env('PUBLIC_URL','http://localhost'),
 
 
     // -----------------------------------------------------------

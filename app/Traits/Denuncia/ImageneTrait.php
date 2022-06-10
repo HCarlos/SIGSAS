@@ -22,7 +22,7 @@ trait ImageneTrait
 
     // Get Image
     public function getPathImageAttribute(){
-        $path = config('atemun.public_url');
+        $path = config('sigsas.public_url');
         $root = trim($this->root) == "" ? $path : $this->root;
         $exists = Storage::disk($this->disk)->exists($this->image);
         $file = $root."/storage/" . $this->disk."/".$this->image;
@@ -35,7 +35,7 @@ trait ImageneTrait
 
    // Get Image Thumbnail
     public function getPathImageThumbAttribute(){
-        $path = config('atemun.public_url');
+        $path = config('sigsas.public_url');
         $root = trim($this->root) == "" ? $path : $this->root;
         $fl   = explode('.',$this->image);
         $dg   = $fl[count($fl)-1];
