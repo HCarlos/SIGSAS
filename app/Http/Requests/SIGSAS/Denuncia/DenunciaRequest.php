@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\SIGSAS\Denuncia;
 
+use App\Classes\GeneralFunctions;
 use App\Classes\MessageAlertClass;
 use App\Http\Controllers\SIGSAS\Storage\StorageDenunciaController;
 use App\Models\SIGSAS\Denuncias\Denuncia;
@@ -134,7 +135,8 @@ class DenunciaRequest extends FormRequest
                 'modificadopor_id'             => $this->modificadopor_id,
                 'domicilio_ciudadano_internet' => strtoupper(trim($this->domicilio_ciudadano_internet))  ?? '' ,
                 'observaciones'                => strtoupper(trim($this->observaciones)),
-
+                'ip'                           => GeneralFunctions::getIp(),
+                'host'                         => config('sigsas.public_url'),
             ];
 
             $item = $this->guardar($Item);

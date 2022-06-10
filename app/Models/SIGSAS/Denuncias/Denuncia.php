@@ -38,6 +38,7 @@ class Denuncia extends Model
         'searchtextdenuncia',
         'folio_sas','favorable',
         'cerrado','fecha_cerrado','cerradopor_id','firmado','uuid',
+        'ip', 'host',
 
 
     ];
