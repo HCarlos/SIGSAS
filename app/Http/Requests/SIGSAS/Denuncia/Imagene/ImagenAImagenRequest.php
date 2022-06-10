@@ -128,6 +128,7 @@ class ImagenAImagenRequest extends FormRequest
         $fileName = $name.'.' . $ext;
         $thumbnail = '_thumb_'.$name.'.png';
         $Item->update([
+            'root'          => config('atemun.public_url'),
             'image'         => $fileName,
             'image_thumb'   => $thumbnail,
         ]);

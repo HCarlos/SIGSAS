@@ -30,7 +30,9 @@ class StorageDenunciaController extends Controller{
         $host   = gethostbyaddr($_SERVER['REMOTE_ADDR']);
         $idemp  = 1;
         $data    = $request->all();
+
         //dd($request);
+
         $user = Auth::User();
         $arrFiles =$request->files->keys();
         try {
@@ -81,6 +83,7 @@ class StorageDenunciaController extends Controller{
             $fileName2 = '_'.$name.'.png';
             $thumbnail = '_thumb_'.$name.'.png';
             $Item->update([
+                'root'          => config('atemun.public_url'),
                 'image'         => $fileName,
                 'image_thumb'   => $thumbnail,
             ]);

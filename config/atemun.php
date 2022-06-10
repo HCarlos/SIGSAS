@@ -51,6 +51,7 @@ return [
     'dias_mas_fecha_ejecucion' => env('DIAS_MAS_FECHA_EJECUCION',3),
     'dias_mas_fecha_limite'    => env('DIAS_MAS_FECHA_LIMITE',5),
 
+    'public_url' => env('PUBLIC_URL','http://localhost'),
 
     'consulta_500_items_general' => 500,
 
