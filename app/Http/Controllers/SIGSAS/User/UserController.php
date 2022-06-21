@@ -186,7 +186,7 @@ class UserController extends Controller{
 
         $this->msg = "Registro Guardado con éxito!";
         session(['msg' => $this->msg]);
-        return redirect()->route('listUsers');
+        return redirect()->route('userList');
     }
 
 
@@ -203,7 +203,7 @@ class UserController extends Controller{
             $id = $Obj->id;
         }
         session(['msg' => $this->msg]);
-        return redirect()->route('listUsers');
+        return redirect()->route('userList');
     }
 
     protected function updateItemV2(UserRequest $request)
